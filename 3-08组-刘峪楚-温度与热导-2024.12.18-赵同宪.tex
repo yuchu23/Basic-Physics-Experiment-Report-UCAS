@@ -1,0 +1,608 @@
+% 本模板根据中国科学院大学本科生公共必修课程《基础物理实验》Word模板格式编写
+% 本模板由Shing-Ho Lin和Jun-Xiong Ji于2022年9月共同完成, 旨在方便LaTeX原教旨主义者和被Word迫害者写实验报告, 避免Word文档因插入过多图与公式造成卡顿. 
+% 如有任何问题, 请联系: linchenghao21@mails.ucas.ac.cn
+% This is the LaTeX template for experiment report of Experimental Physics courses, based on its provided Word template. 
+% This template is completed by the joint collabration of Shing-Ho Lin and Junxiong Ji in September 2022. 
+% Adding numerous pictures and equations leads to unsatisfying experience in Word. Therefore LaTeX is better. 
+% Feel free to contact us via: linchenghao21@mails.ucas.ac.cn
+
+\documentclass[11pt]{article}
+
+\usepackage[a4paper]{geometry}
+\geometry{left=2.0cm,right=2.0cm,top=2.5cm,bottom=2.5cm}
+
+\usepackage{ctex} % 支持中文的LaTeX宏包
+\usepackage{amsmath,amsfonts,graphicx,subfigure,amssymb,bm,amsthm,mathrsfs,mathtools,breqn} % 数学公式和符号的宏包集合
+\usepackage{algorithm,algorithmicx} % 算法和伪代码的宏包
+\usepackage[noend]{algpseudocode} % 算法和伪代码的宏包
+\usepackage{fancyhdr} % 自定义页眉页脚的宏包
+\usepackage[framemethod=TikZ]{mdframed} % 创建带边框的框架的宏包
+\usepackage{fontspec} % 字体设置的宏包
+\usepackage{adjustbox} % 调整盒子大小的宏包
+\usepackage{fontsize} % 设置字体大小的宏包
+\usepackage{tikz,xcolor} % 绘制图形和使用颜色的宏包
+\usepackage{multicol} % 多栏排版的宏包
+\usepackage{multirow} % 表格中合并单元格的宏包
+\usepackage{makecell} % 单元格中换行的宏包
+\usepackage{diagbox} % 表格斜线的宏包
+\usepackage{pdfpages} % 插入PDF文件的宏包
+\RequirePackage{listings} % 在文档中插入源代码的宏包
+\RequirePackage{xcolor} % 定义和使用颜色的宏包
+\usepackage{wrapfig} % 文字绕排图片的宏包
+\usepackage{bigstrut,multirow,rotating} % 支持在表格中使用特殊命令的宏包
+\usepackage{booktabs} % 创建美观的表格的宏包
+\usepackage{circuitikz} % 绘制电路图的宏包
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+\lstset{
+  frame=tb,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  framerule=1pt,
+  rulecolor=\color{gray!35},
+  backgroundcolor=\color{gray!5},
+  basicstyle={\small\ttfamily},
+  numbers=none,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{blue},
+  commentstyle=\color{dkgreen},
+  stringstyle=\color{mauve},
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=3,
+}
+
+% 轻松引用, 可以用\cref{}指令直接引用, 自动加前缀. 
+% 例: 图片label为fig:1
+% \cref{fig:1} => Figure.1
+% \ref{fig:1}  => 1
+\usepackage[capitalize]{cleveref}
+% \crefname{section}{Sec.}{Secs.}
+\Crefname{section}{Section}{Sections}
+\Crefname{table}{Table}{Tables}
+\crefname{table}{Table.}{Tabs.}
+
+\setmainfont{Times New Roman}
+\setCJKmainfont{黑体}
+\setCJKsansfont{宋体}
+\setCJKmonofont{仿宋}
+\punctstyle{kaiming}
+% 偏好的几个字体, 可以根据需要自行加入字体ttf文件并调用
+
+\renewcommand{\emph}[1]{\begin{kaishu}#1\end{kaishu}}
+
+\newcommand*{\unit}[1]{\mathop{}\!\mathrm{#1}}
+\newcommand*{\dif}{\mathop{}\!\mathrm{d}}%微分算子 d
+\newcommand*{\pdif}{\mathop{}\!\partial}%偏微分算子
+\newcommand*{\cdif}{\mathop{}\!\nabla}%协变导数、nabla 算子
+\newcommand*{\laplace}{\mathop{}\!\Delta}%laplace 算子
+\newcommand*{\deriv}[2]{\frac{\mathrm{d} #1}{\mathrm{d} {#2}}}
+\newcommand*{\derivh}[3]{\frac{\mathrm{d}^{#1} #2}{\mathrm{d} {#3^{#1}}}}
+\newcommand*{\pderiv}[2]{\frac{\partial #1}{\partial {#2}}}
+\newcommand*{\pderivh}[3]{\frac{\partial^{#1} #2}{\partial {#3^{#1}}}}
+\newcommand*{\mcelsius}{\unit{\prescript{\circ}{}C}}
+%改这里可以修改实验报告表头的信息
+\newcommand{\experiName}{温度的测量，用动态法测定良导体的热导率}
+\newcommand{\supervisor}{赵同宪}
+\newcommand{\name}{刘峪楚}
+\newcommand{\studentNum}{2023K8009929030}
+\newcommand{\class}{3}
+\newcommand{\group}{08}
+\newcommand{\seat}{2}
+\newcommand{\dateYear}{2024}
+\newcommand{\dateMonth}{12}
+\newcommand{\dateDay}{18}
+\newcommand{\room}{427}
+\newcommand{\others}{$\square$}
+%% 如果是调课、补课, 改为: $\square$\hspace{-1em}$\surd$
+%% 否则, 请用: $\square$
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\chapter}[2]{\begin{center}\bf\Large{第#1部分\quad #2}\end{center}}
+
+\begin{document}
+
+%若需在页眉部分加入内容, 可以在这里输入
+% \pagestyle{fancy}
+% \lhead{\kaishu 测试}
+% \chead{}
+% \rhead{}
+
+\begin{center}
+    \LARGE \bf 《\, 基\, 础\, 物\, 理\, 实\, 验\, 》\, 实\, 验\, 报\, 告
+\end{center}
+
+\begin{center}
+    \noindent \emph{实验名称}\underline{\makebox[25em][c]{\experiName}}
+    \emph{指导教师}\underline{\makebox[8em][c]{\supervisor}}\\
+    \emph{姓名}\underline{\makebox[6em][c]{\name}} 
+    % 如果名字比较长, 可以修改box的长度"6em"
+    \emph{学号}\underline{\makebox[10em][c]{\studentNum}}
+    \emph{分班分组及座号} \underline{\makebox[5em][c]{\class \ -\ \group \ -\ \seat }\emph{号}} （\emph{例}:\, 1\,-\,04\,-\,5\emph{号}）\\
+    \emph{实验日期} \underline{\makebox[3em][c]{\dateYear}}\emph{年}
+    \underline{\makebox[2em][c]{\dateMonth}}\emph{月}
+    \underline{\makebox[2em][c]{\dateDay}}\emph{日}
+    \emph{实验地点}\underline{{\makebox[4em][c]\room}}
+    \emph{调课/补课} \underline{\makebox[3em][c]{\others\ 是}}
+    \emph{成绩评定} \underline{\hspace{5em}}
+    {\noindent}
+    \rule[8pt]{17cm}{0.2em}
+\end{center}
+
+\section{实验目的}
+
+\subsection{动态法测定良导体的热导率}
+
+1. 通过实验学会一种测量热导率的方法。
+
+2. 解动态法的特点和优越性。
+
+3. 认识热波，加强对波动理论的理解。
+
+\subsection{温度的测量和温度计的设计}
+
+1. 用电位差计测热电偶的温差电动势。
+
+2. 用平衡电桥测热敏电阻和铜电阻的温度特性曲线。
+
+3. 设计非平衡电桥实现对热敏电阻的实时测量。
+
+\section{实验仪器}
+
+\subsection{动态法测定良导体的热导率}
+
+仪器主机由用绝热材料紧紧包裹其侧表面的圆棒状样品、热电偶列阵、以及实现边界条件的脉动热源、冷却装置组成，其中样品我们用的是铜、铝而所谓的热电偶列阵实际上就是一种传感器。示意图如图所示：
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=8cm]{图1.jpg}
+    \caption{主机结构示意图}
+\end{figure}
+
+这样的结构有一个好处：只要我们测量出了轴线上各点的温度分布，就可确定整个棒体上的温度分布，从而大大简化了实验操作。
+
+仪器结构框图的结构分为样品单元、控制单元和结构单元共三个部分。具体的结构框图如下图所示：
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=8cm]{图2.jpg}
+    \caption{热导率动态测量的结构框图}
+\end{figure}
+
+\subsection{温度的测量和温度计的设计}
+
+本实验采用 DHT-2 型热学实验仪进行温度计的控温，通过 UJ36a 型携带式直流电位差计测量热电偶的电压， DHQJ-5 型教学用多功能电桥具有开放式电桥，双臂电桥、单臂电桥、功率电桥及非平衡使用的单臂电桥等功能，可以用平衡电桥测温度计的电阻，用非衡电桥对温度计进行实时测量。
+
+DHT-2 型热学实验仪的面板如下图：
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=8cm]{图3.jpg}
+  \caption{DHT-2型热学实验仪的前面板示意图}
+\end{figure}
+
+UJ36a 型携带式直流电位差计的电路图和操作面板如下列两图所示：
+
+\begin{figure}[H]
+  \begin{minipage}[t]{0.6\linewidth}
+      \centering
+      \includegraphics[height=3.5cm]{图4.jpg}
+      \caption{电路图}
+  \end{minipage}
+  \begin{minipage}[t]{0.39\linewidth}
+      \centering
+      \includegraphics[height=3.5cm]{图5.jpg}
+      \caption{操作面板}
+  \end{minipage}
+\end{figure}
+
+DHQJ-5型教学用多功能电桥，其电路图和操作面板分别如下图所示：
+
+\begin{figure}[H]
+  \begin{minipage}[t]{0.6\linewidth}
+      \centering
+      \includegraphics[height=3.5cm]{图6.jpg}
+      \caption{电路图}
+  \end{minipage}
+  \begin{minipage}[t]{0.39\linewidth}
+      \centering
+      \includegraphics[height=3.5cm]{图7.jpg}
+      \caption{操作面板}
+  \end{minipage}
+\end{figure}
+
+\section{实验原理}
+
+\subsection{动态法测定良导体的热导率}
+
+由热传导定律，垂直于面积为$A$的截面在单位时间内流过的热量，即其热流可以用公式\begin{displaymath}\frac{\mathrm{d}q}{\mathrm{d}t}=-kA\frac{\mathrm{d}T}{\mathrm{d}x}\end{displaymath}描述，其中$k$即待测的热导率。
+
+对上式求微分并考虑热平衡方程，则有：\begin{displaymath}C\rho A\mathrm{d}x\frac{\mathrm{d}T}{\mathrm{d}t}=\mathrm{d}\left(\frac{\mathrm{d}q}{\mathrm{d}t}\right)=-kA\frac{\mathrm{d}^2 T}{\mathrm{d} x^2}\mathrm{d}x\end{displaymath} 
+其中$C,\rho$分别是材料的比热容和密度。
+
+这样我们就得到了热流方程：\begin{displaymath}\frac{\mathrm{d}T}{\mathrm{d}t}=D\frac{\mathrm{d}^2 T}{\mathrm{d}x^2},D:=\frac{k}{C\rho}\end{displaymath}
+这里的$D$称之为热扩散系数。
+
+特别地，若令温度热端随时间的变化是简谐的，即满足\begin{displaymath}T=T_0+T_m\sin \omega t\end{displaymath}
+
+而冷端浸入冷水冷却，从而保持恒定的低温$T_0$，则上式的解为：\begin{displaymath}T=T_0-\alpha x+T_m\exp \left(-\sqrt{\frac{\omega}{2D}}x\right)\cdot \sin \left(\omega t-\sqrt{\frac{\omega}{2D}}x\right)\end{displaymath}其中$T_0$是直流成分而$\alpha$是线性成分的斜率。
+
+通过上式可以得出结论：当热端的温度以简谐方式变化时，热流将以不断衰减的波动的形式在棒内向冷端传播，这称之为热波。此外，热波的波速为：$\displaystyle V=\sqrt{2D\omega}$，波长为：$\displaystyle \lambda=2\pi\sqrt{\frac{2D}{\omega}}$。
+
+所以，若已知热端温度变化的角频率，则仅需测出波速或者波长，就可以求出热导率：\begin{displaymath}V^2=2\frac{k}{C\rho}\omega\Rightarrow k=\frac{V^2C\rho}{4\pi f}=\frac{V^2C\rho}{4\pi}T\end{displaymath}这里的$f,T$分别为热端温度按照简谐规律变化的频率和周期。
+
+
+\subsection{温度的测量和温度计的设计}
+
+
+\subsubsection{用电位差计测热电偶的温差电动势}
+
+温差电动势在一定范围内有：\begin{displaymath}Ex\approx\alpha(t-t_0)\end{displaymath}.
+
+\subsubsection{平衡电桥测铜电阻温度特性曲线}
+
+在温度不是很高的情况下，金属的电阻随温度成线性变化：\begin{displaymath}R_x=R_{x_0}(1+\alpha t)\end{displaymath}.
+
+\subsubsection{平衡电桥测铜电阻温度特性曲线}
+
+而半导体电阻随温度的变化具有指数关系：\begin{displaymath}R_T=A\exp \left(\frac{B}{T}\right)\end{displaymath}其中$A$是与电阻器几何形状以及材料性质有关的常数，而$B$是与材料半导体性质有关的常数。而且这里$T$表示绝对温度。
+
+将上式取对数并固定两个基点的温度值，可得：\begin{displaymath}A=R_{T_1}\exp \left(-\frac{B}{T_1}\right)\end{displaymath}
+
+下图为金属电阻与半导体电阻的温度特性曲线：
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=8cm]{图8.jpg}
+  \caption{金属电阻与半导体电阻的温度特性曲线}
+\end{figure}
+
+\subsubsection{非平衡电桥热敏电阻温度计的设计}
+
+实验原理如下图所示：
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=8cm]{图9.jpg}
+    \caption{设计非平衡电桥实现对热敏电阻的实时测量}
+\end{figure}
+
+则可求出$U_0$：\begin{displaymath}U_0=\left( \frac{R_x}{R_2+R_x}+\frac{R_3}{R_1+R_3}\right)E\end{displaymath}其中$R_x=A\exp \left(\frac{B}{T}\right)$
+
+将其代入并进行Taylor级数展开，忽略三阶以上小量，得到了线性关系式：\begin{displaymath}U_0=\lambda+m(t-t_1)\end{displaymath}其中，\begin{displaymath}\lambda=\left(\frac{B+2T_1}{2B}-\frac{R_3}{R_1+R_3}\right)E,m=\left(\frac{4T_1^2-B^2}{4BT_1^2}\right)E\end{displaymath}
+
+所以可得到以下三个关系：\begin{displaymath}E=\left(\frac{4BT_1^2}{4T_1^2-B^2}\right)m\end{displaymath}
+  
+\begin{displaymath}R_2=\frac{B-2T}{B+2T}R_{xT_1}\end{displaymath}
+
+\begin{displaymath}\frac{R_1}{R_3}=\frac{2BE}{(B+2T_1)E-2B\lambda}-1\end{displaymath}
+
+\section{实验内容}
+
+\subsection{动态法测定良导体的热导率}
+
+先测铜棒的导热率，后测铝棒地导热率。
+
+\begin{enumerate}
+
+  \item 实验前， 检查管路是否堵塞. 打开仪器盖, 仔细阅读注意事项. 两端冷却水管在两个样品中是串连的, 水流先走铝后走铜. (一般先测铜样品, 后测铝样品, 以免冷却水变热.)
+  
+  \item 打开水源, 从出水口观察流量, 要求水流稳定 (将阀门稍微打开即可).
+  
+  \begin{enumerate}
+
+      \item (热端水流量较小时, 待测材料内温度较高; 水流较大时, 温度波动较大.) 因此热端水流要保持一个合适的流速, 阀门开至1/3开度即可. 冷端水流量要求不高, 只要保持固定的室温即可. 
+
+      \item 调节水流: 保持电脑操作软件的数据显示曲线幅度和形状较好.
+
+  \end{enumerate}
+
+  \item 打开电源开关, 主机进入工作状态, 选择 “程控” 工作方式开始测量.
+
+  \begin{enumerate}
+
+      \item 完成前述实验步骤, 调节好合适的水流量. 因进水电磁阀初始为关闭状态, 需要在测量开始后加热器停止加热的半周期内才调整和观察热端流速. 
+
+      \item 打开操作软件. 操作软件使用方法参见实验桌内的 "实验指导" 中 "操作软件使用" 部分说明.
+      
+      \item "平滑" 功能尽量不要按, 防止信号失真. 
+  \end{enumerate}
+
+  \item 在控制软件中设置热源周期$T = 180\unit{s}$. 选择铜样品进行测量. 
+
+  \item 设置$x,y$轴单位坐标. $x$方向为时间, 单位是秒, $y$方向是信号强度, 单位为毫伏 (与温度对应). 
+
+  \item 在 "选择测量点" 栏中选择一个或某几个测量点. 
+
+  \item 按下 "操作" 栏中 "测量" 按钮, 仪器开始测量工作, 在电脑屏幕上画出$T$-$t$曲线簇. $40$分钟后, 系统进入动态平衡, 样品内温度动态稳定. 此时按下 "暂停" , 在 "文件" 菜单中选择保存, 存储数据.
+
+  \item 换用铝样品, 重复上几个步骤, 继续测量.
+
+  \item 将实验数据通过网络发送给实验人供存储用. 实验结束后, 按顺序先关闭测量仪器, 然后关闭自来水, 最后关闭电脑. 
+
+\end{enumerate}
+
+本实验大部分工作都由仪器和电脑完成, 我只需按照软件提示操作即可。
+
+\subsection{温度的测量和温度计的设计}
+
+\subsubsection{用电位差计测热电偶的温差电动势}
+
+\begin{enumerate}
+    
+  \item 按照线路图连接线路, 冷端放置在冰水混合物中, 确保$t=0 \mcelsius$, 热电偶端置于加热器中. 注意热电偶不要接反.
+  
+  \item 调节电位差计, 把倍率开关旋向需要的位置, 检流计调零.
+  
+  \item 将电键开关扳向 "标准", 调节多圈变阻器, 使检流计调零.
+  
+  \item 将电键开关扳向 "未知", 调节步进盘和滑线盘, 使检流计指零. 有公式:
+  
+  \[
+      E_{\mathrm{x}} = (\text{步进盘读数}+\text{滑线盘读数})\times\text{倍率}
+  \]
+  在本实验中，不需要调节步进盘，只需转动滑线盘.
+  
+  \item 在室温下测得热电偶的电动势.
+  
+  \item 开启温控仪电源, 对热端加热, 在$ 30\sim 50\mcelsius $区间内每隔$5\,\mcelsius $测定一组$ (t,E_x)$. 需等温度稳定后进行读数测量. 
+
+  \item 绘制温度特性曲线, 通过线性拟合求得温度系数. 
+
+\end{enumerate}
+
+\subsubsection{用平衡电桥测热敏电阻和铜电阻的电阻值}
+
+\begin{enumerate}
+    
+    \item 在室温下测得热敏电阻、铜电阻的电阻值. 
+
+    \item 在$ 30\sim 50\,\mcelsius $区间内每隔$ 5\mcelsius $测定一组$ (t,R_x) $. 
+
+    \item 绘制两者的温度特性曲线, 通过线性拟合求温度系数: 铜电阻的系数$\alpha$和热敏电阻的常数$A$和$B$. 
+
+\end{enumerate}
+
+注: 温度升高较快, 降低较慢. 温控仪到达一个需要测量的温度点的时候, 可以同时测量热电偶电动势, 铜和热敏电阻的电阻值, 有利于实验更快完成.
+
+\subsubsection{用非平衡电桥制作热敏电阻温度计}
+
+\begin{enumerate}
+    
+  \item 选定$ \lambda = -0.4\,\mathrm{V},\; m=-0.01\,\mathrm{V/\mcelsius},\; t_1=40\mcelsius $, 根据在$ 30\mcelsius,\;50\mcelsius $下测得的热敏电阻大小计算$ A,\,B $, 进而计算$ E,\,R_2,\,\dfrac{R_1}{R_3} $.
+
+  \item 根据计算结果设定非平衡电桥的参数, 将温控仪温度设定为$ 40\mcelsius $, 微调$ R_2 $阻值, 使得电压表测得电压接近$ -400\,\mathrm{mV} $. 
+
+  \item 改变温控仪温度, 在$ 30\sim 50\mcelsius $区间内, 照实验PPT上所写, 每隔$ 2\mcelsius $测得一组$ U_0,\,t $, 观察自制温度计测温的精度. 
+
+\end{enumerate}
+
+\section{实验数据}
+
+\subsection{动态法测定良导体的热导率}
+
+相邻热电偶的间距$ l_0=2\,\mathrm{cm} $, 周期$ T=180\,\mathrm{s} $, 铜的比热为$ 0.385\,\mathrm{J/(g\cdot K)} $, 密度为$ 8.92\,\mathrm{g/m^3} $; 铝的比热为$ 0.880\,\mathrm{J/(g\cdot K)} $, 密度为$ 2.7\,\mathrm{g/cm^3} $.
+
+计算热导率可使用公式如下：
+\[
+    k = \frac{v^2C\rho T}{4\pi}
+\]
+其中$ v $为波速, $ C $为比热, $ \rho $为密度, $ T $为周期.
+
+根据电脑自动记录的数据导出的结果，我们在中间的时间段选取一些数据作为测量值，数据见下表：
+
+\begin{table}[H]
+  \centering
+  \caption{动态法测铜的热导率数据}
+  \begin{tabular}{|c|c|c|c|c|c|c|}
+      \hline
+      测量点$n$&3517  & 3530  & 3542  & 3556  & 3568  & 3581 \\
+      \hline
+      对应峰值时间$t$(s)&1757.52 & 1764.04 & 1770.04 & 1777.04 & 1783.04 & 1789.52 \\
+      \hline
+      波速$v$(m/s)&0.00307 & 0.00333 & 0.00286 & 0.00286 & 0.00333 & 0.00307 \\
+      \hline
+  \end{tabular}
+\end{table}
+
+注：波速的第六个数值为向后继续读一个数据点测算出来的。
+
+波速平均值$v=0.00309 \unit{m/s}$，铜的热导率$k = \frac{v^2C\rho T}{4\pi} = 469 \unit{W/(m\cdot K)}$，相对误差为$\frac{|469-398|}{398} = 17.84 \%$，误差不算太大。
+
+\begin{table}[H]
+  \centering
+  \caption{动态法测铝的热导率数据}
+  \begin{tabular}{|c|c|c|c|c|c|c|}
+      \hline
+      测量点n&3129  & 3150  & 3173  & 3196  & 3214  & 3240 \\
+      \hline
+      对应峰值时间&1571.52 & 1582.04 & 1593.52 & 1605.04 & 1614.04 & 1627.04 \\
+      \hline
+      波速&0.00190  & 0.00174  & 0.00174  & 0.00222  & 0.00154  & 0.00200  \\
+      \hline
+  \end{tabular}
+\end{table}
+
+注：波速的第六个数值为向后继续读一个数据点测算出来的。
+
+波速平均值$v=0.00186 \unit{m/s}$, 铝的热导率$k = \frac{v^2C\rho T}{4\pi} = 133 \unit{W/(m\cdot K)}$，相对误差为$\frac{|133-237|}{237} = 43.88 \%$，误差较前一实验大。
+
+另外，根据电脑自动记录的数据导出的结果，可以作图如下：
+
+\begin{figure}[H]
+  \begin{minipage}[t]{0.6\linewidth}
+      \centering
+      \includegraphics[width=8cm,height=5cm]{Cu.jpg}
+      \caption{铜的热导率测量结果}
+  \end{minipage}
+  \begin{minipage}[t]{0.39\linewidth}
+      \centering
+      \includegraphics[width=8cm,height=5cm]{Al.jpg}
+      \caption{铝的热导率测量结果}
+  \end{minipage}
+\end{figure}
+
+\subsection{温度的测量和温度计的设计}
+
+\subsubsection{电位差计测热电偶的温差电动势}
+
+室温为$28.1\mcelsius$, 冷端温度为$0\mcelsius$。测得的电动势如下表所示：
+
+\begin{table}[H]
+  \centering
+  \caption{电位差计测热电偶的温差电动势数据}
+  \begin{tabular}{|c|c|c|c|c|c|c|}
+      \hline
+      温度t&28.1  & 30.0  & 35.0  & 40.1  & 45.0  & 50.1  \\
+      \hline
+      电动势$E_x$&0.21  & 0.29  & 0.49  & 0.72  & 0.91  & 1.14 \\
+      \hline
+  \end{tabular}
+\end{table}
+
+根据表中数据作图如下：
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=10cm]{电位差计测热电偶温差电动势.png}
+    \caption{热电偶的温差电动势-温度曲线}
+\end{figure}
+
+则根据斜率可得到热电偶温差电系数$\alpha = 0.0421 \unit{mV/K}$。
+
+\subsubsection{平衡电桥测铜电阻温度特性曲线}
+
+室温为$28.1\mcelsius$，此时铜电阻大小为$R_X=56.0 \unit{\Omega}$.测得的数据如下表所示：
+
+\begin{table}[H]
+    \centering
+    \caption{平衡电桥测铜电阻的电阻值数据}
+    \begin{tabular}{|c|c|c|c|c|c|c|}
+        \hline
+        温度$t \unit{(\mcelsius)}$&28.1  & 30.0  & 35.0  & 40.1  & 45.0  & 50.1  \\
+        \hline
+        电阻$R_X \unit{(\Omega)}$&56.0  & 56.3  & 57.3  & 58.3  & 59.4  & 60.4  \\
+        \hline
+    \end{tabular}
+\end{table}
+
+根据表中数据作图如下：
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=10cm]{平衡电桥测铜电阻温度特性曲线.png}
+    \caption{铜电阻的电阻值-温度曲线}
+\end{figure}
+
+根据斜率可得到铜电阻温度系数$\alpha = 0.2022 \unit{\Omega/K}$。
+
+\subsubsection{平衡电桥测热敏电阻温度特性曲线}
+
+室温为$28.1\mcelsius$，但是此时我犯了一个迷糊，忘记测热敏电阻的阻值。其余温度测得的数据如下表所示：
+
+\begin{table}[H]
+  \centering
+  \caption{平衡电桥测热敏电阻的电阻值数据}
+  \begin{tabular}{|c|c|c|c|c|c|c|}
+      \hline
+      温度$t \unit{(\mcelsius)}$&30&34.9&40&45.1&50\\
+      \hline
+      电阻$R_T \unit{(\Omega)}$&30    & 35    & 40.1  & 45    & 50.1 \\
+      \hline
+      $\ln R_T$&7.628031127 & 7.377758908 & 7.185387016 & 7.021083964 & 6.835184586 \\
+      \hline
+      $\dfrac{1}{T} \unit{(K^{-1})}$&0.00330033 & 0.003246753 & 0.003193868 & 0.003144654 & 0.003095017 \\
+      \hline
+  \end{tabular}
+\end{table}
+
+根据表中数据作图如下：
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=10cm]{平衡电桥测热敏电阻温度特性曲线.png}
+    \caption{热敏电阻的电阻值-温度曲线}
+\end{figure}
+
+则可得到特性常数$A=e^{-4.9107}=0.00736$，$B=3792.2 \unit{\Omega \cdot K}$。
+
+\subsubsection{用非平衡电桥制作热敏电阻温度计}
+
+根据上面实验的结果以及所需公式, 我们可以给出需要的参数:
+$A = 0.00736,\ B = 3792.2,\ \lambda = -0.4\unit{V},\ m = -0.01\unit{V/\mcelsius},\ E =\left(\frac{4BT_1^2}{4T_1^2-B^2}\right)m = 1.062\unit{V},\ R_1 = R_3 \frac{R_1}{R_3}=\frac{2BE}{(B+2T_1)E-2B\lambda}-1 = 42.7\unit{\Omega},\ R_2 = \frac{B-2T}{B+2T}R_{xT_1} = 945.95\unit{\Omega},,\ R_3 = 1000\unit{\Omega}$.
+
+按照前文所述设置好电路后，测得的数据如下表所示：
+
+\begin{table}[H]
+  \centering
+  \caption{用非平衡电桥制作热敏电阻温度计数据}
+  \begin{tabular}{|c|c|c|c|c|c|}
+      \hline
+      设定温度$t \unit{(\mcelsius)}$&38.9  & 40.1  & 44.9  & 51.4  & 55.1 \\
+      \hline
+      测试电压$U_0$(mV)&-389  & -400  & -450  & -516  & -555 \\
+      \hline
+      测试温度$\unit{(\mcelsius)}$&38.9  & 40.0  & 45.0  & 51.6  & 55.5  \\
+      \hline
+  \end{tabular}
+\end{table}
+
+可以观察到，温度较低时，测量的温度值与设定的温度值十分接近，但是随着温度的升高，测量的温度值与设定的温度值之间的误差逐渐增大。我猜测，可能是随着温度升高，电路中的电阻值发生了变化，导致了测量的温度值与设定的温度值之间的误差增大。
+
+\section{思考题}
+
+\begin{enumerate}
+
+    \item 如果想知道某一时刻$t$时材料棒上的热波, 即$T$-$x$曲线, 将如何做? 
+    
+    选取同一时刻, 使用所得数据进行波形拟合, 得出的曲线即所需的$T$-$x$曲线.
+
+    \item 为什么较后面测量点的$T$-$t$曲线振幅越来越小? 
+    
+    从原理上讲, 热传递的方向是从高温到低温, 整体趋势上不可能产生越往后越高的现象, 因为这样热源就不会再向后面的样品传递热量. 并且, 我们观察下述描绘热波的公式:
+    \[
+        T = T_0 - \alpha x + T_{\mathrm{m}} \mathrm{e}^{-\sqrt{\frac{\omega}{2D}}x} \cdot \sin \left( \omega t - \sqrt{\frac{\omega}{2D}}x \right)
+    \]
+    正弦波被乘以了一个与$x$有关的衰减因子。$x$越大, 衰减因子就越小.
+
+    \item 为什么实验中铝棒的测温点才$8$个, 而铜棒的测温点达到$12$个? 
+    
+    铝棒的热传导系数比铜棒小, 热传导速度慢, 因此铝棒的热波传播速度较慢, 采样点可以少一些, 而铜棒的热波传播速度较快, 采样点需要多一些.
+
+    \item 实验中误差的来源有哪些? 
+    
+    一、热传递本身就是理想模型, 样品很可能受到四周的热量影响而产生温度变化。二、水流未必是恒温的, 外界也未必是恒温的，样品与外界可能存在热量交换。第三, 热电偶测温能测到的精度不是很高, 读数时会看到一个非常平稳的峰值区域, 不方便具体精确测量峰值时间。
+
+    \item 温度曲线$T$-$t$有时具有较为平缓的峰顶, 如何确认峰位? 你是怎么考虑的? 
+
+    因为波形是对称的，所以取峰值的中间时刻作为峰位。
+
+\end{enumerate}
+
+\section{实验总结}
+
+本次实验是热学实验，主要是通过动态法测定良导体的热导率，以及测量温度和设计温度计。由于仪器设备存在的老化问题，实验或多或少都出现了误差，但总的来看，实验结果还是比较符合预期的通过本次实验，我对热学知识有了更深入的理解，也感受到了计算机和自动化设备对物理实验的极大便利。
+
+\section{实验原始数据记录表}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=16cm]{p1.jpg}
+  \caption{实验数据p1}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=16cm]{p2.jpg}
+  \caption{实验数据p2}
+\end{figure}
+
+
+
+
+
+\end{document}

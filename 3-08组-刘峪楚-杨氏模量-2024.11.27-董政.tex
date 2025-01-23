@@ -1,0 +1,896 @@
+% 本模板根据中国科学院大学本科生公共必修课程《基础物理实验》Word模板格式编写
+% 本模板由Shing-Ho Lin和Jun-Xiong Ji于2022年9月共同完成, 旨在方便LaTeX原教旨主义者和被Word迫害者写实验报告, 避免Word文档因插入过多图与公式造成卡顿. 
+% 如有任何问题, 请联系: linchenghao21@mails.ucas.ac.cn
+% This is the LaTeX template for experiment report of Experimental Physics courses, based on its provided Word template. 
+% This template is completed by the joint collabration of Shing-Ho Lin and Junxiong Ji in September 2022. 
+% Adding numerous pictures and equations leads to unsatisfying experience in Word. Therefore LaTeX is better. 
+% Feel free to contact us via: linchenghao21@mails.ucas.ac.cn
+
+\documentclass[11pt]{article}
+
+\usepackage[a4paper]{geometry}
+\geometry{left=2.0cm,right=2.0cm,top=2.5cm,bottom=2.5cm}
+
+\usepackage{ctex} % 支持中文的LaTeX宏包
+\usepackage{amsmath,amsfonts,graphicx,subfigure,amssymb,bm,amsthm,mathrsfs,mathtools,breqn} % 数学公式和符号的宏包集合
+\usepackage{algorithm,algorithmicx} % 算法和伪代码的宏包
+\usepackage[noend]{algpseudocode} % 算法和伪代码的宏包
+\usepackage{fancyhdr} % 自定义页眉页脚的宏包
+\usepackage[framemethod=TikZ]{mdframed} % 创建带边框的框架的宏包
+\usepackage{fontspec} % 字体设置的宏包
+\usepackage{adjustbox} % 调整盒子大小的宏包
+\usepackage{fontsize} % 设置字体大小的宏包
+\usepackage{tikz,xcolor} % 绘制图形和使用颜色的宏包
+\usepackage{multicol} % 多栏排版的宏包
+\usepackage{multirow} % 表格中合并单元格的宏包
+\usepackage{makecell} % 单元格中换行的宏包
+\usepackage{diagbox} % 表格斜线的宏包
+\usepackage{pdfpages} % 插入PDF文件的宏包
+\RequirePackage{listings} % 在文档中插入源代码的宏包
+\RequirePackage{xcolor} % 定义和使用颜色的宏包
+\usepackage{wrapfig} % 文字绕排图片的宏包
+\usepackage{bigstrut,multirow,rotating} % 支持在表格中使用特殊命令的宏包
+\usepackage{booktabs} % 创建美观的表格的宏包
+\usepackage{circuitikz} % 绘制电路图的宏包
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+\lstset{
+  frame=tb,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  framerule=1pt,
+  rulecolor=\color{gray!35},
+  backgroundcolor=\color{gray!5},
+  basicstyle={\small\ttfamily},
+  numbers=none,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{blue},
+  commentstyle=\color{dkgreen},
+  stringstyle=\color{mauve},
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=3,
+}
+
+% 轻松引用, 可以用\cref{}指令直接引用, 自动加前缀. 
+% 例: 图片label为fig:1
+% \cref{fig:1} => Figure.1
+% \ref{fig:1}  => 1
+\usepackage[capitalize]{cleveref}
+% \crefname{section}{Sec.}{Secs.}
+\Crefname{section}{Section}{Sections}
+\Crefname{table}{Table}{Tables}
+\crefname{table}{Table.}{Tabs.}
+
+\setmainfont{Times New Roman}
+\setCJKmainfont{黑体}
+\setCJKsansfont{宋体}
+\setCJKmonofont{仿宋}
+\punctstyle{kaiming}
+% 偏好的几个字体, 可以根据需要自行加入字体ttf文件并调用
+
+\renewcommand{\emph}[1]{\begin{kaishu}#1\end{kaishu}}
+
+\newcommand*{\unit}[1]{\mathop{}\!\mathrm{#1}}
+\newcommand*{\dif}{\mathop{}\!\mathrm{d}}%微分算子 d
+\newcommand*{\pdif}{\mathop{}\!\partial}%偏微分算子
+\newcommand*{\cdif}{\mathop{}\!\nabla}%协变导数、nabla 算子
+\newcommand*{\laplace}{\mathop{}\!\Delta}%laplace 算子
+\newcommand*{\deriv}[2]{\frac{\mathrm{d} #1}{\mathrm{d} {#2}}}
+\newcommand*{\derivh}[3]{\frac{\mathrm{d}^{#1} #2}{\mathrm{d} {#3^{#1}}}}
+\newcommand*{\pderiv}[2]{\frac{\partial #1}{\partial {#2}}}
+\newcommand*{\pderivh}[3]{\frac{\partial^{#1} #2}{\partial {#3^{#1}}}}
+\newcommand*{\mcelsius}{\unit{\prescript{\circ}{}C}}
+%改这里可以修改实验报告表头的信息
+\newcommand{\experiName}{测量金属的杨氏模量}
+\newcommand{\supervisor}{董政}
+\newcommand{\name}{刘峪楚}
+\newcommand{\studentNum}{2023K8009929030}
+\newcommand{\class}{3}
+\newcommand{\group}{08}
+\newcommand{\seat}{2}
+\newcommand{\dateYear}{2024}
+\newcommand{\dateMonth}{11}
+\newcommand{\dateDay}{27}
+\newcommand{\room}{710}
+\newcommand{\others}{$\square$}
+%% 如果是调课、补课, 改为: $\square$\hspace{-1em}$\surd$
+%% 否则, 请用: $\square$
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\chapter}[2]{\begin{center}\bf\Large{第#1部分\quad #2}\end{center}}
+
+\begin{document}
+
+%若需在页眉部分加入内容, 可以在这里输入
+% \pagestyle{fancy}
+% \lhead{\kaishu 测试}
+% \chead{}
+% \rhead{}
+
+\begin{center}
+    \LARGE \bf 《\, 基\, 础\, 物\, 理\, 实\, 验\, 》\, 实\, 验\, 报\, 告
+\end{center}
+
+\begin{center}
+    \noindent \emph{实验名称}\underline{\makebox[25em][c]{\experiName}}
+    \emph{指导教师}\underline{\makebox[8em][c]{\supervisor}}\\
+    \emph{姓名}\underline{\makebox[6em][c]{\name}} 
+    % 如果名字比较长, 可以修改box的长度"6em"
+    \emph{学号}\underline{\makebox[10em][c]{\studentNum}}
+    \emph{分班分组及座号} \underline{\makebox[5em][c]{\class \ -\ \group \ -\ \seat }\emph{号}} （\emph{例}:\, 1\,-\,04\,-\,5\emph{号}）\\
+    \emph{实验日期} \underline{\makebox[3em][c]{\dateYear}}\emph{年}
+    \underline{\makebox[2em][c]{\dateMonth}}\emph{月}
+    \underline{\makebox[2em][c]{\dateDay}}\emph{日}
+    \emph{实验地点}\underline{{\makebox[4em][c]\room}}
+    \emph{调课/补课} \underline{\makebox[3em][c]{\others\ 是}}
+    \emph{成绩评定} \underline{\hspace{5em}}
+    {\noindent}
+    \rule[8pt]{17cm}{0.2em}
+\end{center}
+
+\chapter{1}{拉伸法测定金属的杨氏模量}
+
+\section{实验目的}
+
+\begin{enumerate}
+  \item 理解各种静态方法测杨氏模量及其测量微小位移方法的原理及优缺点，了解动态法测杨氏模量的原理。
+  \item 学会读数望远镜、读数显微镜的调节。学习用逐差法、作图法和最小二乘法处理数据。
+\end{enumerate}
+
+\section{实验仪器}
+
+CCD杨氏弹性模量测量仪(LB-YM1 型、YMC-2 型)、螺旋测微器、钢卷尺。
+
+下图是实验装置的示意图：
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[height=6.5cm]{LB-YM1 型实验仪器示意图.png}
+    \caption{LB-YM1 型实验仪器示意图}
+\end{figure}
+
+LB-YM1型杨氏弹性模量测量仪主要项目的技术指标: 
+    
+\begin{table}[H]
+  \centering
+  \begin{tabular}{|c|c|}
+    \hline
+    读数显微镜放大倍数  & $15$倍 \\
+    \hline
+    测量架测量范围  & $0 \sim 4\unit{mm}$    \\
+    \hline
+    分划板分度值  & $0.05\unit{mm}$  \\
+    \hline
+    CCD    & $12\unit{V}$电源    \\
+    \hline
+    钼丝  & $L=1000, \Phi 0.18$    \\
+    \hline
+    不锈钢丝 & $L=1000, \Phi 0.30$ \\
+    \hline
+    光学平台 & $405 \times 308 \times 39\unit{mm}$ \\
+    \hline
+    镀铬钢制砝码 & 250g/个，共8个 \\
+    \hline
+    水准器 & $\Phi 40\unit{mm}$ \\
+    \hline
+  \end{tabular}
+\end{table}
+
+\section{实验原理}
+
+\subsection{杨氏模量}
+
+在形变中，最简单的形变是柱状物体受外力作用时的伸长或缩短形变。设柱状物体的长度为$L$ ，截面积为$S$ ，沿长度方向受外力$F$作用后伸长(或缩短)量为$\Delta L$ ，单位横截面积上垂 直作用力$\dfrac{F}{S}$称为正应力，物体的相对伸长$\dfrac{\Delta L}{L}$称为线应变。实验结果证明，在弹性范围内，正应力与线应变成正比，即
+
+\begin{equation}
+    \frac{F}{S} = Y \frac{\Delta L}{L}
+\end{equation}
+
+这个规律称为虎克定律。式中比例系数$Y$称为杨氏弹性模量。在国际单位制中，它的单位为N/m2 ，在厘米克秒制中为达因/厘米$^2$。
+
+本实验需要测量钢丝或钼丝的杨氏弹性模量，实验方法是将金属丝悬挂于支架上，上端固定，下端加砝码对金属丝施加力$F$，测出金属丝相应的伸长量$\Delta L$ ，即可求出$Y$。金属丝长度$L$用钢卷尺测量，金属丝的横截面积$S = \dfrac{\pi d^2}{4}$，直径$d$用螺旋测微器测出，力$F$由砝码的质量求出。则可得：
+
+\begin{equation}
+    Y = \frac{4FL}{\pi d^2 \Delta L}
+\end{equation}
+
+\subsection{测量原理}
+
+在实际测量中，由于金属丝伸长量$\Delta L$的值很小，约$10^{-1} \unit{mm}$数量级。因此这里$\Delta L$的测量采用显微镜和 CCD 成像系统进行测量。如图 1 所示，在悬垂的金属丝下端连着十字叉丝板和砝码盘，当盘中加上质量为$M$的砝码时，金属丝受力增加了
+
+\begin{equation}
+    F = Mg
+\end{equation}
+
+十字叉丝随着金属丝的伸长同样下降了$\Delta L$ ，而叉丝板通过显微镜的物镜成像在最小分度为$0.05\unit{mm}$的分划板上，再被目镜放大，所以能够用眼睛通过显微镜对$\Delta L$做直接测量。采用CCD系统代替眼睛更便于观测，并且能够减轻视疲劳。
+
+\section{注意事项}
+
+\begin{enumerate}
+    \item 使用 CCD 摄像机须知:CCD 器件不可正对太阳、激光或其他强光源。注意保护镜头，防潮、防尘、防污染。非特别需要，请勿随意卸下。
+    \item 金属丝必须保持铅直形态。测直径时要特别谨慎，避免由于扭转、拉扯、牵挂导致细丝折弯变形。
+    \item 读数时一定要等到刻度值稳定之后才能进行。
+    \item 将砝码放置于砝码盘的时候一定要保证轻拿轻放，防止钼丝突然受力而断裂。
+    \item 做完实验，取下所有砝码放好。
+\end{enumerate}
+
+\section{实验内容}
+
+\begin{enumerate}
+    \item 仪器调节
+    \begin{enumerate}
+        \item 支架的调节：为了使金属丝处于铅直状态，应检查两支柱是否铅直（工作台是否水平），否则应调节螺旋底角（支撑脚）。在钩码上放置 1 个 250g 砝码对金属丝拉直，检查金属丝上是否有弯曲、折弯等情况。如有，应更换金属丝。调节下横梁高度，保证叉丝组放置在下横梁的槽内。调节 CCD 摄像正对叉丝组分划板。
+        \item CCD 摄像机的调节：将 CCD 摄像头放入固定座内，将 CCD 摄像头与分划板放置在同一水平面上，前后调节 CCD 摄像头观察监视器，直到可以观察到清晰的像，若分划板刻度尺像不在监视器的中心，则微调 CCD 摄像头位置使像处于中心位置。
+    \end{enumerate}
+
+    \item 测量
+    \begin{enumerate}
+        \item 在测量钼丝杨氏模量之前，先放砝码把金属丝拉直，保证分划板卡在下衡梁的槽内，这样可以避免在拉直过程中分划板旋转。注意分划板刻度尺在监视器上位置不要过高，需低于3mm。
+        \item 记下待测细丝下的砝码盘未加砝码时屏幕上显示的毫米尺在横线上的读数$l_0=0$，以后在砝码盘上每增加一个$M=250 \unit{g}$的砝码，记下相应的叉丝读数$l_i (i=1,2, \cdots ,8)$。然后逐一减掉砝码，再从屏上读取$l_1',l_2', \cdots ,l_8'$.
+        \item 取同一负荷下叉丝读数的平均值$\bar{l_1},\bar{l_2}, \cdots \bar{l_8}$，用逐差法求出钼丝荷重增减 4 个砝码时光标的平均偏移量$\Delta L$。
+        \item 用钢卷尺测量上、下夹头间的金属丝长度$L$。
+        \item 用螺旋测微器测量金属丝直径$d$，由于钼丝直径可能不均匀，按工程要求应在上、中、下各部进行测量。每位置在相互垂直的方向各测一次。
+        \item 将前述原理公式分解整理即得：
+        \begin{equation}
+            Y = \frac{4MgL}{\pi d^2 \Delta L}
+        \end{equation}
+        式中，$\Delta L$与$M$有对应关系，如果$M$是 1 个砝码的质量，$\Delta L$应是荷重增（或减）1 个砝码所引起的光标偏移量；如果$\Delta L$是荷重增（或减）4 个砝码所引起的光标偏移量，$M$就应是 4 个砝码的质量。
+        
+        参考：钼丝的杨氏模量 $Y$ 约为 $2.3 \times 10^{11} \unit{N/m^2}$。
+    \end{enumerate}
+\end{enumerate}
+
+\section{实验数据}
+
+经多次测量取平均值后，测得钼丝长度$L = 792.21 \unit{mm}$。卷尺仪器误差$e = 2.0\unit{mm}$。
+
+钼丝直径测量数据见下表：
+
+\begin{table}[H]
+  \centering
+  \begin{tabular}{|c|c|c|c|c|c|c|c|}
+      \hline
+      测量次数&1&2&3&4&5&6&平均值$\bar{d}$\\
+      \hline
+      d/mm&0.182 & 0.181 & 0.182 & 0.18  & 0.181 & 0.179 & 0.181\\
+      \hline
+  \end{tabular}
+  \caption{钼丝直径测量数据}
+\end{table}
+
+监视器初始示数$l_0 = 1.00 \unit{mm}$。千分尺仪器误差$e =\pm 0.004 \unit{mm}$。
+
+实验测得的数据如下表：
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|c|c|c|c|c|c|c|c|}
+        \hline
+        \multirow{2}{*}{序号i}&\multirow{2}{*}{砝码质量}&\multicolumn{3}{c|}{叉丝读数}&\multirow{2}{*}{$l_i M_i$/(mm$\cdot$g)}&\multirow{2}{*}{\makecell{示数差值 \\ $\Delta \bar{l}_l = \bar{l}_{i+4}-\bar{l}_l$}}&\multirow{2}{*}{不确定度$\Delta (\Delta l)$}\\
+        \cline{3-5}
+        &&加载$l_i$/mm&卸载$l_i$/mm&平均值$\bar{l_l}$/mm&&&\multirow{8}{*}{0.008}\\
+        \cline{1-8}
+        1&500   & 0.75  & 0.76  & 0.755  & 377.5 & 0.905 &\\
+        \cline{1-7}
+        2&750   & 0.53  & 0.54  & 0.535  & 401.25 & 0.900 &\\
+        \cline{1-7}
+        3&1000  & 0.29  & 0.30  & 0.295  & 295   & 0.870 &\\
+        \cline{1-7}
+        4&1250  & 0.08  & 0.07  & 0.075  & 93.75 & 0.920 &\\
+        \cline{1-7}
+        5&1500  & -0.15  & -0.15  & -0.150  & -225  &\multirow{4}{*}{}&\\
+        \cline{1-6}
+        6&1750  & -0.37  & -0.36  & -0.365  & -638.75 &  &\\
+        \cline{1-6}
+        7&2000  & -0.58  & -0.57  & -0.575  & -1150 &  &\\
+        \cline{1-6}
+        8&2250  & -0.85  & -0.84  & -0.845  & -1901.25 &  &\\
+        \hline        
+    \end{tabular}
+
+    \begin{tabular}{|c|c|c|c|}
+        \hline
+        $\bar{M}$&1375&$\bar{\bar{l}}$&-0.034\\
+        \hline
+        $\sum M$&11000&$\sum \bar{l}$&-0.275\\
+        \hline
+    \end{tabular}
+    \caption{钼丝杨氏模量测量数据记录}
+\end{table}
+
+\subsection{逐差法计算杨氏模量}
+
+钼丝直径$d$: 千分尺仪器允差$e = 4.0\times 10^{-6}\unit{m}$, 不确定度:
+\[
+    \sigma_d = \sqrt{\frac{\sum_{i=1}^{6} (d_i-\overline{d})^2}{6\times 5} + \frac{e^2}{3}} = 4.773 \times 10^{-4} \unit{m}
+\]
+
+钼丝长度$L$: 给定不确定度$\sigma_L = 2 \times 10^{-3} \unit{m}$
+
+所以钼丝直径、长度的测量值分别为$d = 0.181 \pm 0.48 \unit{mm}$, $L = 792.2 \pm 2.0 \unit{mm}$.
+
+\[
+    \Delta \bar{L} = \frac{\sum_{i=1}^{4} \Delta \bar{l}_i}{16} = 0.22 \unit{mm}
+\]
+
+分划板刻度允差$e = 0.005\unit{mm}$, 这时$\Delta L$的不确定度: 
+
+\[
+    \sigma_{\Delta \bar{L}} = \sqrt{\frac{\sum_{i=1}^{4} (\Delta \bar{l}_i - \bar{\Delta L})}{4 \times 3} + \frac{e^2}{3}} = 1.0 \cdot 10^{-2} \unit{mm}
+\]
+
+平均伸长量$\Delta L = 0.22 \pm 0.010 \unit{mm}$.
+
+本实验中$M$差值恒定，有$M=250 \unit{g}$，故$F = Mg = 2.45 \unit{N}$.
+
+代入公式，计算杨氏模量，有：
+\[
+    Y = \frac{4FL}{\pi d^2 \Delta L} = \frac{4 \times 0.25 \times 9.8 \times 792.2 \times 10^{-3}}{\pi \times (0.181 \times 10^{-3})^2 \times 0.22 \times 10^{-3}} = 3.42 \times 10^{11} \unit{N/m^2}
+\]
+
+相对不确定度合成后为:
+\[
+    \sigma_Y = Y\sqrt{\frac{\sigma_d^2}{d^2} + \frac{\sigma_l^2}{a^2} + \frac{\sigma_{(\Delta L)}^2}{(\Delta L)^2}} = 3.42 \cdot 10^{11} \cdot \sqrt{\frac{0.04773^2}{0.181^2} + \frac{2^2}{792.2^2} + \frac{0.010^2}{0.22^2}} = 9.15 \cdot 10^{10} \unit{N \cdot m^{-2}}
+\]
+
+所以杨氏模量的测量结果为: $3.42 \cdot 10^{11}  \pm 9.15 \cdot 10^{10} \unit{(N \cdot m^{-2})}$. 和理论值的误差大约在$\dfrac{|3.42 \cdot 10^{11} - 2.3\cdot 10^{11}|}{2.3\cdot 10^{11}} = 48 \%$
+实验误差较大。
+
+\subsection{作图法计算杨氏模量}
+
+将(4)式写成如下形式：
+
+\begin{equation}
+    M = \frac{\pi d^2 Y}{4gL} \Delta L
+\end{equation}
+令$\displaystyle K = \frac{\pi d^2 Y}{4gL}$，即(5)式转换成$M = K \Delta L$，作图如下：
+
+\begin{figure}[H]
+    \centering
+    \caption{作$M-\Delta L$图法计算拉伸法测得杨氏模量}
+    \includegraphics[height=8cm]{拉伸法作图.png}
+\end{figure}
+
+可以看出，图线斜率的绝对值约为$1107.3 \unit{kg/m}$，计算得$Y = 2.36 \times 10^{11} \unit{N/m^2}$，误差约为$\dfrac{|2.36 - 2.3|}{2.3} = 2.61 \%$.这次实验相比前一个实验非常准确。
+
+\section{实验总结}
+\begin{enumerate}
+    \item 这次实验拉伸法算得的数据，与钼丝杨氏模量理论值误差极大，原因可能是钼丝长度测量时，我用卷尺进行读时数出现错误；有可能是钼丝直径测量时，我用螺旋测微器读数时出现了错误；也有可能是我在读数时，没有等到刻度值稳定之后才进行读数，导致读数不准确；当然，也有可能是钼丝本身的问题，之前的同学测量时可能对钼丝造成了损坏，导致钼丝的杨氏模量发生了变化。
+    \item 本次实验中，我学会了如何使用读数显微镜、螺旋测微器、钢卷尺等测量仪器，学会了如何用逐差法、作图法和最小二乘法处理数据，学会了如何计算各物理量的不确定度，并用不确定度正确表达实验结果。
+\end{enumerate}
+
+\section{思考题}
+
+\begin{enumerate}
+    \item 杨氏模量测量数据 N 若不用逐差法而用作图法，如何处理?
+    
+    作图法的原理是将$M$-$\Delta L$作图，斜率即为$K$，而$K = \dfrac{\pi d^2 Y}{4gL}$，所以$Y = \dfrac{4gL}{\pi d^2} K$，所以只需将$K$代入即可。
+    \item 两根材料相同但粗细不同的金属丝，它们的杨氏模量相同吗？为什么？
+    
+    相同。杨氏模量为材料的固有性质，是表征材料抗应变能力的参量，其大小只与材料的种类有关，与材料粗细无关。
+    \item 本实验使用了哪些测量长度的量具？选择它们的依据是什么？它们的仪器误差各是多少？
+    
+    使用的仪器有钢卷尺、螺旋测微计、CCD 杨氏模量测量仪，依据是量程、精度、方便程度。试验中 $L$ 为 $1\unit{m}$ 量级的，使用钢卷尺量程和精度合适。直径 $d$ 为 $1\unit{mm}$ 量级，需使用螺旋测微计以达到需要的精度。而伸长量$\Delta L$为 $0.1\unit{mm}$ 量级的，而且不方便使用接触式测量，因此使用 CCD 的光学测量方法较为合适。各仪器允差上文均已给出，此处不再赘述。
+    \item 在 CCD 法测定金属丝杨氏模量实验中，为什么起始时要加一定数量的底码？
+    
+    初始状态金属丝可能会有轻微的弯折，加力后这弯折部分被拉直，产生不是由金属系本身伸缩导致的伸长。因此在开始之前加适量的砝码将钼丝尽可能拉直以减小误差。
+    \item 加砝码后标示横线在屏幕上可能上下颤动不停，不能够完全稳定时，如何判定正确读数？
+    
+    待其稳定后读数。如最终仍不稳定，可取振幅最大两处平均值作参考数据。
+    \item 金属丝存在折弯使测量结果如何变化？
+    
+    金属丝折弯会使测量结果偏大，因为折弯部分的伸长量不是由金属丝本身伸缩导致的伸长。
+    \item 用螺旋测微器或游标卡尺测量时，如果初始状态都不在零位因此需要读出值减初值，对测量值的误差有何影响？
+    
+    误差不变，因为误差是由仪器本身的精度决定的，与读数的起始位置无关。
+\end{enumerate}
+
+\setcounter{section}{0}
+
+\chapter{2}{使用霍尔传感器测杨氏模量（弯曲法）}
+
+\section{实验目的}
+
+熟悉霍尔位置传感器的特性，完成样品的测量和对霍尔位置传感器定标，理解传感器特定曲线对测量的意义；
+
+\section{实验仪器}
+
+杭州大华 DHY-A 霍尔位置传感器法杨氏模量测定仪(底座固定箱、读数显微镜及调节机构、SS495A 型集成霍尔位置传感器、测试仪、磁体、支架、加力机构等)
+
+样品为黄铜条、铸铁条。
+
+测试仪由霍尔电压测量系统和电子称加力系统构成，霍尔电压测试分为两个量程，带调零功能;电子称加力系统测量范围$0 \sim 199.9\unit{g}$。
+
+下图是实验装置的示意图：
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[height=7.5cm]{instrument01.jpg}
+    \caption{霍尔位置传感器测杨氏模量实验装置图}
+\end{figure}
+    
+\begin{figure}[H]
+    \centering
+    \includegraphics[height=6cm]{instrument02.jpg}
+    \caption{测试仪面板图}
+\end{figure}
+
+SS495A 型集成霍尔位置传感器各个项目的技术指标: 
+
+\begin{enumerate}
+
+    \item 读数显微镜: 
+    
+    \begin{tabular}{|c|c|}
+        \hline
+        型号    & JC-10型   \\
+        \hline
+        目镜放大率  & $10$倍 \\
+        \hline
+        目镜测微鼓轮最小分度值  & $0.01\unit{mm}$    \\
+        \hline
+        物镜放大率  & $2$倍  \\
+        \hline
+        测量范围    & $0\sim 6\unit{mm}$    \\
+        \hline
+        鼓轮实际读数最小分辨率  & $0.01/2=0.005\unit{mm}$    \\
+        \hline
+    \end{tabular}
+
+    \item 电子称传感器加力系统: $0$-$199.9\unit{g}$连续可调, 三位半数显. 
+    
+    \item 霍尔电压表： 
+    
+    \begin{tabular}{|c|c|}
+        \hline
+        量程 & 分辨率  \\
+        \hline
+        $0\sim 199.9\unit{mV}$ & $0.1\unit{mV}$ \\
+        \hline
+        $0\sim 1.999\unit{V}$ & $1\unit{mV}$ \\
+        \hline
+    \end{tabular}
+
+    \item 霍尔位置传感器: 灵敏度大于$250\unit{mV \cdot mm^{-1}}$, 线性范围$0\sim 2 \unit{mm}$. 
+    
+\end{enumerate}
+
+\section{实验原理}
+
+\subsection{霍尔效应}
+
+霍尔元件置于磁感强度为$B$的磁场中, 在垂直于磁场方向通以电流$I$, 则与这二者垂直的方向上将产生霍尔电势差$U_H$: 
+\[
+    U_{H} = R\cdot\frac{IB}{d} = K\cdot I\cdot B
+\]
+式中$K$为元件的霍尔灵敏度. 如果保持霍尔元件的电流$I$不变, 而使其在一个均匀梯度的磁场中移动时, 则输出的霍尔电势差变化量为: 
+\[
+    \Delta U_H = KI\frac{\dif B}{\dif z}\Delta Z
+\]
+
+霍尔电势差与位移量之间存在一一对应关系, 当位移量较小($<2\unit{mm}$), 这一一对应关系具有良好的线性. 
+
+\subsection{弯曲法测杨氏模量}
+
+利用施力计, 让试样的中间向下弯曲, 我们可以用确定力量时试样下降的距离测量杨氏模量. 矩形截面的横梁弯曲量较小时, 可给出近似的杨氏模量计算公式: 
+\[
+    Y = \frac{d^{3}Mg}{4a^{3}b\Delta Z}
+\]
+其中, $d$为支架两刀口间的距离 (即样品的有效长度), $M$为对样品施加拉力所对应的质量, $a$为样品梁的厚度, $b$为样品梁的宽度, $\Delta Z$为中心下降距离, $g$为重力加速度. 
+
+\section{注意事项}
+
+\begin{enumerate}
+    \item 用千分尺待测样品厚度必须不同位置多点测量取平均值。测量黄铜样品时，因黄铜比钢软，旋紧千分尺时，用力适度，不宜过猛。
+    \item 用读数显微镜测量铜刀口基线位置时，刀口不能晃动。
+\end{enumerate}
+
+\section{实验内容}
+
+\begin{enumerate}
+    \item 调节使集成霍尔位置传感器探测元件处于磁铁中间的位置. 
+    \item 用水平泡观察平台是否处于水平位置, 若偏离时调节水平调节机脚. 
+    \item 对霍尔位置传感器毫伏电压表调零. 通过磁体调节结构上下移动磁铁, 当毫伏表读数值很小时, 停止调节并固定螺丝, 最后调节调零电位器使毫伏表读数为零. 
+    \item 调节读数显微镜, 使眼睛观察到清晰的十字线及分划板刻度线和数字. 然后移动读数显微镜前后距离, 直到清晰看到铜刀口上的黑色基线. 使用适当的力锁紧加力旋钮旁边的锁紧螺钉, 转动读数显微镜读数鼓轮使铜刀口上的基线与读数显微镜内十字刻度线吻合. 
+    \item 在拉力绳不受力的情况下将电子称传感器加力系统进行调零. 
+    \item 通过加力调节旋钮逐次增加拉力 (每次增加$10\unit{g}$) , 相应从读数显微镜上读出梁的弯曲位移$\Delta Z_i$及霍尔数字电压表相应的读数值$U_i$ (单位$\unit{mV}$) . 以便计算杨氏模量和对霍尔位置传感器进行定标. 
+    \item 实验完毕松开加力旋钮旁边的锁紧螺钉, 松开加力旋钮, 取下式样. 
+    \item 多次测量并记录试样在两刀口间的长度$d$、不同位置横梁宽度$b$以及横梁厚度$a$. 
+    \item 关闭电源, 整理实验桌面, 实验器材放置于实验初始位置. 
+    \item 用逐差法求得材料的杨氏模量、计算杨氏模量的不确定度. 并使用作图法、最小二乘法求出霍尔位置传感器的灵敏度$\Delta U_i/\Delta Z_i$. 
+    \item 把测量结果与公认值进行比较
+\end{enumerate}
+
+黄铜材料特性标准数据: $E_0 = 10.55\times 10^{10} \unit{N\cdot m^{-2}}$，铸铁材料特性标准数据: $E_0 = 18.15 \times 10^{10} \unit{N\cdot m^{-2}}$。
+
+\section{实验数据}
+
+\subsection{铸铁样品}
+
+\begin{enumerate}
+    \item 横梁的几何尺寸，如下表：
+    
+    \begin{table}[H]
+        \centering
+        \begin{tabular}{|c|c|c|c|c|c|c|c|}
+            \hline
+            测量次数&1&2&3&4&5&6&平均值\\
+            \hline
+            长度d/mm&300.1  & 300.1  & 299.9  & 299.9  & 300.0  & 299.7  & 300.0   \\
+            \hline
+            宽度b/mm&22.90  & 23.01  & 22.77  & 22.85  & 22.90  & 22.88  & 22.89  \\
+            \hline
+            厚度a/mm&0.788  & 0.788  & 0.800  & 0.801  & 0.804  & 0.803  & 0.797  \\
+            \hline
+        \end{tabular}
+        \caption{横梁的几何尺寸}
+    \end{table}
+
+    \item 读数显微镜示数，显微镜初始读数$Z_0 = 2.812 \unit{mm}$，其余数据如下表：
+    
+    \begin{table}[H]
+        \centering
+        \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|}
+            \hline
+            序号$i$&1&2&3&4&5&6&7&8&平均值\\
+            \hline
+            $M_i$/g&20.2  & 40.5  & 59.9  & 80.1  & 100.4 & 119.9 & 140.2 & 160.2 & 90.18\\
+            \hline
+            $Z_i$/mm&2.985 & 3.177 & 3.399 & 3.561 & 3.714 & 3.83  & 3.915 & 4.041 & 3.578\\
+            \hline
+            $U_i$/mV&17    & 33    & 50    & 67    & 83    & 100   & 116   & 133   & 74.9  \\
+            \hline
+            $\Delta Z_i$/mm&0.729  & 0.653  & 0.516  & 0.480  &       &       &       &       & 0.595  \\
+            \hline
+            $\Delta U_i$/mV&66    & 67    & 66    & 66    &       &       &       &       & 66.25 \\
+            \hline
+            $U_i \text{/mV}^2$&289   & 1089  & 2500  & 4489  & 6889  & 10000 & 13456 & 17689 & 7050.125\\
+            \hline
+            $Z_i \text{/mm}^2$&8.910  & 10.093  & 11.553  & 12.681  & 13.794  & 14.669  & 15.327  & 16.330  & 12.920\\
+            \hline
+            $Z_i U_i \text{/mm} \cdot \text{mV}$&50.745  & 104.841  & 169.950  & 238.587  & 308.262  & 383.000  & 454.140  & 537.453  & 280.872\\
+            \hline
+        \end{tabular}
+        \caption{铸铁材料数据初步处理}
+    \end{table}
+\end{enumerate}
+
+\subsubsection{逐差法计算杨氏模量}
+
+横梁长度 (刀口间距) $d$: 直尺仪器允差$e = 2.0\times 10^{-3}\unit{m}$, 不确定度:
+
+\[
+    \sigma_d = \sqrt{\frac{\sum_{i=1}^{6} (d_i-\overline{d})^2}{6\times 5} + \frac{e^2}{3}} = 1.2 \cdot 10^{-3} \unit{m}
+\]
+
+横梁宽度$b$: 游标卡尺仪器允差$e = 2.0\times 10^{-5}\unit{m}$, 不确定度:
+
+\[
+    \sigma_b = \sqrt{\frac{\sum_{i=1}^{6} (b_i-\overline{b})^2}{6\times 5} + \frac{e^2}{3}} = 3.4 \cdot 10^{-5} \unit{m}
+\]
+
+横梁厚度$a$: 千分尺仪器允差$e = 4.0\times 10^{-6}\unit{m}$, 不确定度:
+
+\[
+    \sigma_a = \sqrt{\frac{\sum_{i=1}^{6} (a_i-\overline{a})^2}{6\times 5} + \frac{e^2}{3}} = 3.8 \cdot 10^{-6}  \unit{m}
+\]
+
+所以横梁长度、宽度、厚度的测量值分别为$d = 300.0 \pm 1.2 \unit{mm}\,,\ b = 22.89 \pm 0.034 \unit{mm}\,,\ a = 0.797 \pm 0.0038\unit{mm}$.
+
+\[
+    \Delta Z = \frac{\sum_{i=1}^4 \Delta Z_i}{16} = 0.149 \unit{mm}
+\]
+
+$D=0.01\unit{mm}\,,\ e = 0.002\unit{mm}$, 这时$\Delta Z$的不确定度: 
+\[
+    \sigma_{\Delta Z} = \sqrt{\frac{D^2}{10^2} + \frac{D^2}{10^2} + \frac{e^2}{3}} = \sqrt{\frac{0.01^2}{10^2} + \frac{0.01^2}{10^2} + \frac{0.002^2}{3}} = 1.8 \cdot 10^{-3} \unit{mm}
+\]
+
+本实验中$M$差值不恒定, 计算$M = \frac{(100.4+119.9+140.2+160.2) - (20.2+40.5+59.9+80.1)}{16} = 20.00 \unit{g}$
+
+代入公式, 计算杨氏模量:
+\[
+    Y = \frac{d^{3}Mg}{4a^{3}b\Delta Z} = \frac{(300.0 \cdot 10^{-3})^{3} \cdot 20.00 \cdot 10^{-3} \cdot 9.8}{4 \cdot (0.797 \cdot 10^{-3})^{3} \cdot 22.89 \cdot 10^{-3} \cdot 0.149 \cdot 10^{-3}} = 17.65 \cdot 10^{10}  \unit{N \cdot m^{-2}}
+\]
+
+相对不确定度合成后为:
+\[
+    \sigma_Y = Y\sqrt{\frac{\sigma_d^2}{d^2} + \frac{\sigma_a^2}{a^2} + \frac{\sigma_b^2}{b^2} + \frac{\sigma_{\Delta Z}^2}{(\Delta Z)^2}} = 17.65 \cdot 10^{10} \cdot \sqrt{\frac{1.2^2}{300.0^2} + \frac{0.0038^2}{0.797^2} + \frac{0.034^2}{22.89^2} + \frac{0.0018^2}{0.149^2}} = 2.42 \cdot 10^{9} \unit{N \cdot m^{-2}}
+\]
+
+所以杨氏模量的测量结果为: $17.65 \cdot 10^{10}  \pm 2.42 \cdot 10^{9} \unit{(N \cdot m^{-2})}$. 和理论值的误差大约在$\dfrac{|17.65 \cdot 10^{10} - 18.15\cdot 10^{10}|}{18.15\cdot 10^{10}} = 2.76 \%$，误差在一个较小的范围内，实验比较成功。
+
+\subsubsection{作图法计算灵敏度系数}
+
+根据表中数据可作出如下$ U-Z $图象：
+
+\begin{figure}[H]
+    \centering
+    \caption{作图法计算霍尔位置传感器的灵敏度系数}
+    \includegraphics[height=8cm]{铸铁霍尔法作图.png}
+\end{figure}
+
+可以算得斜率$\displaystyle K_H I \deriv{B}{z}  = 108.83 \unit{V/m}$，即霍尔传感器灵敏度为$108.83\unit{V/m}$。
+
+\subsection{黄铜样品}
+
+\begin{enumerate}
+    \item 横梁的几何尺寸，如下表：
+    
+    \begin{table}[H]
+        \centering
+        \begin{tabular}{|c|c|c|c|c|c|c|c|}
+            \hline
+            测量次数&1&2&3&4&5&6&平均值\\
+            \hline
+            长度d/mm&228.0  & 227.7  & 228.1  & 228.3  & 227.7  & 227.9  & 228.0    \\
+            \hline
+            宽度b/mm&23.00  & 22.96  & 22.82  & 22.86  & 22.78  & 22.90  & 22.89  \\
+            \hline
+            厚度a/mm&0.930  & 0.941  & 0.937  & 0.940  & 0.946  & 0.951  & 0.941   \\
+            \hline
+        \end{tabular}
+        \caption{横梁的几何尺寸}
+    \end{table}
+
+    \item 读数显微镜示数，显微镜初始读数$Z_0 = 2.385 \unit{mm}$，其余数据如下表：
+    
+    \begin{table}[H]
+        \centering
+        \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|}
+            \hline
+            序号$i$&1&2&3&4&5&6&7&8&平均值\\
+            \hline
+            $M_i$/g&10.1  & 19.9  & 29.9  & 40.0  & 50.1  & 60.3  & 69.6  & 79.7  & 44.95\\
+            \hline
+            $Z_i$/mm&2.566  & 2.709  & 2.870  & 2.941  & 3.088  & 3.221  & 3.359  & 3.464  & 3.027  \\
+            \hline
+            $U_i$/mV&19    & 40    & 61    & 81    & 102   & 127   & 144   & 166   & 92.5  \\
+            \hline
+            $\Delta Z_i$/mm&0.522  & 0.512  & 0.489  & 0.523  &       &       &       &       & 0.512  \\
+            \hline
+            $\Delta U_i$/mV&83    & 87    & 83    & 85    &       &       &       &       & 84.5  \\
+            \hline
+            $U_i \text{/mV}^2$&361   & 1600  & 3721  & 6561  & 10404 & 16129 & 20736 & 27556 & 10883.5 \\
+            \hline
+            $Z_i \text{/mm}^2$&6.584  & 7.339  & 8.237  & 8.649  & 9.536  & 10.375  & 11.283  & 11.999  & 9.250\\
+            \hline
+            $Z_i U_i \text{/mm} \cdot \text{mV}$&48.754  & 108.360  & 175.070  & 238.221  & 314.976  & 409.067  & 483.696  & 575.024  & 294.146  \\
+            \hline
+        \end{tabular}
+        \caption{黄铜材料数据初步处理}
+    \end{table}
+\end{enumerate}
+
+\subsubsection{逐差法计算杨氏模量}
+
+横梁长度 (刀口间距) $d$: 直尺仪器允差$e = 2.0\times 10^{-3}\unit{m}$, 不确定度:
+
+\[
+    \sigma_d = \sqrt{\frac{\sum_{i=1}^{6} (d_i-\overline{d})^2}{6\times 5} + \frac{e^2}{3}} = 1.2 \cdot 10^{-3} \unit{m}
+\]
+
+横梁宽度$b$: 游标卡尺仪器允差$e = 2.0\times 10^{-5}\unit{m}$, 不确定度:
+
+\[
+    \sigma_b = \sqrt{\frac{\sum_{i=1}^{6} (b_i-\overline{b})^2}{6\times 5} + \frac{e^2}{3}} = 3.6 \cdot 10^{-5} \unit{m}
+\]
+
+横梁厚度$a$: 千分尺仪器允差$e = 4.0\times 10^{-6}\unit{m}$, 不确定度:
+
+\[
+    \sigma_a = \sqrt{\frac{\sum_{i=1}^{6} (a_i-\overline{a})^2}{6\times 5} + \frac{e^2}{3}} = 3.8 \cdot 10^{-6}  \unit{m}
+\]
+
+所以横梁长度、宽度、厚度的测量值分别为$d = 228.0 \pm 1.2 \unit{mm}\,,\ b = 22.89 \pm 0.036 \unit{mm}\,,\ a = 0.941 \pm 0.0038\unit{mm}$.
+
+\[
+    \Delta Z = \frac{\sum_{i=1}^4 \Delta Z_i}{16} = 0.128 \unit{mm}
+\]
+
+$D=0.01\unit{mm}\,,\ e = 0.002\unit{mm}$, 这时$\Delta Z$的不确定度: 
+\[
+    \sigma_{\Delta Z} = \sqrt{\frac{D^2}{10^2} + \frac{D^2}{10^2} + \frac{e^2}{3}} = \sqrt{\frac{0.01^2}{10^2} + \frac{0.01^2}{10^2} + \frac{0.002^2}{3}} = 1.8 \cdot 10^{-3} \unit{mm}
+\]
+
+本实验中$M$差值不恒定, 计算$M = \frac{(50.1+60.3+69.6+79.7) - (10.1+19.9+29.9+40.0)}{16} = 9.99 \unit{g}$
+
+代入公式, 计算杨氏模量:
+\[
+    Y = \frac{d^{3}Mg}{4a^{3}b\Delta Z} = \frac{(228.0 \cdot 10^{-3})^{3} \cdot 9.99 \cdot 10^{-3} \cdot 9.8}{4 \cdot (0.941 \cdot 10^{-3})^{3} \cdot 22.89 \cdot 10^{-3} \cdot 0.128 \cdot 10^{-3}} = 11.88 \cdot 10^{10}  \unit{N \cdot m^{-2}}
+\]
+
+相对不确定度合成后为:
+\[
+    \sigma_Y = Y\sqrt{\frac{\sigma_d^2}{d^2} + \frac{\sigma_a^2}{a^2} + \frac{\sigma_b^2}{b^2} + \frac{\sigma_{\Delta Z}^2}{(\Delta Z)^2}} = 11.88 \cdot 10^{10} \cdot \sqrt{\frac{1.2^2}{228.0^2} + \frac{0.0038^2}{0.941^2} + \frac{0.036^2}{22.89^2} + \frac{0.0018^2}{0.128^2}} = 1.86 \cdot 10^{9} \unit{N \cdot m^{-2}}
+\]
+
+所以杨氏模量的测量结果为: $11.88 \cdot 10^{10}  \pm 1.86 \cdot 10^{9} \unit{(N \cdot m^{-2})}$. 和理论值的误差大约在$\dfrac{|11.88 \cdot 10^{10} - 10.55\cdot 10^{10}|}{10.55\cdot 10^{10}} = 12.61 \%$，误差比测量铸铁时稍大，但总体来说也算成功。
+
+\subsubsection{作图法计算灵敏度系数}
+
+根据表中数据可作出如下$ U-Z $图象：
+
+\begin{figure}[H]
+    \centering
+    \caption{作图法计算霍尔位置传感器的灵敏度系数}
+    \includegraphics[height=8cm]{黄铜霍尔法作图.png}
+\end{figure}
+
+可以算得斜率$\displaystyle K_H I \deriv{B}{z}  = 164.19 \unit{V/m}$，即霍尔传感器灵敏度为$164.19\unit{V/m}$。
+
+\section{思考题}
+
+\begin{enumerate}
+
+    \item 弯曲法测杨氏模量实验, 主要测量误差有哪些？请估算各因素的不确定度. 
+   
+    主要测量误差有: 回程差, 样品弯曲不直, 基线不直, 螺旋测微计测样品厚度时将样品压缩变形, 力的不断变化导致读数不准, 拉环施加拉力被摩擦阻力分走一部分, 以及各测量仪器的测量误差和作图法本身的较大误差.
+
+    \item 用霍尔位置传感器法测位移有什么优点？
+   
+    霍尔传感器精度高, 阻力小, 反应灵敏, 实验的误差就比较小; 读数快而反馈及时, 便于实验数据记录.
+   
+\end{enumerate}
+
+
+\setcounter{section}{0}
+\chapter{3}{动态悬挂法测杨氏模量}
+
+\section{实验目的}
+
+\begin{enumerate}
+    \item 学会用动态悬挂法测量材料的杨氏模量;
+    \item 学会用外延法测量, 处理实验数据;
+    \item 了解换能器的功能, 熟悉测试仪器及示波器的使用;
+    \item 培养学生综合运用知识和使用常用试验仪器的能力;
+\end{enumerate}
+
+\section{实验器材}
+
+测量仪器: DHY-2型动态杨氏模量测量台 (如图3), DHY-2型动态杨氏模量测量仪, 通用示波器, 测试棒 (铜, 不锈钢), 悬线, 天平, 游标卡尺, 螺旋测微计.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[height=6.5cm]{DHY-2型动态杨氏模量测量台.png}
+    \caption{DHY-2型动态杨氏模量测量台}
+    \label{fig:动态杨氏模量测量台}
+\end{figure}
+
+\section{实验原理}
+
+根据棒的横振动方程: 
+\[
+    \pderivh{4}{y}{x} + \frac{-\rho S\pdif^2y}{YJ\pdif t^2} = 0
+\]
+式中: $y$为棒振动的位移, $Y$为棒的杨氏模量, $S$为棒的横截面积, $J$为棒的转动惯量, $\rho$为棒的密度, $x$为位置坐标, $t$为时间变量. 通过推导和计算, 可以得到测量棒的杨氏模量$Y$的公式如下:
+\[
+    Y = 1.6067 \frac{L^3mf_1^2}{d^4}
+\]
+其中, $L$为棒长, $d$为棒的直径, $m$为棒的质量, $f_1$为棒共振的基频.
+
+棒的固有频率其实与共振频率不同, 有着如下关系:
+\[
+    f_{\text{固}} = f_{\text{共}} \sqrt{1+\frac{1}{4Q^2}}
+\]
+通常情况下, $Q$足够大, 共振频率和固有频率的偏差仅有$0.005\%$, 因此可以忽略差距, 使用共振频率代替固有频率.
+
+\section{注意事项}
+
+\begin{enumerate}
+    \item 测试棒不可随处乱放，保持清洁，拿放时应特别小心。
+    \item 安装测试棒时，应先移动支架到既定位置，再悬挂测试棒。
+    \item 更换测试棒要细心，避免损坏激振，共振传感器。
+    \item 实验时，测试棒需稳定之后可以进行测量。
+\end{enumerate}
+
+\section{实验内容}
+
+这里对铸铁样品进行测量。
+
+\begin{enumerate}
+    \item 测量测试棒的长度$L$, 直径$d$, 质量$m$. 为提高测量精度, 要求以上量均测量$3$—$5$次.
+    \item 安装测试棒: 如图所示，将测试棒悬挂于两悬线之上，要求测试棒横向水平，悬线与测试棒轴向垂直，两悬线挂点到测试棒两端点的距离$x$分别为$20\unit{mm}$处，并处于静止状态。
+    \item 连机: 按图将测试台、测试仪器、示波器之间用专用导线连接。
+    
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[height=4cm]{测量时的连接图.png}
+    \caption{测量时的连接图}
+\end{figure}
+
+    \item 开机: 分别打开示波器、测试仪的电源开关，调整示波器处于正常工作状态。
+    \item 鉴频与测量: 待测试棒稳定后，调节 “频率调节” 粗、细旋钮，寻找测试棒的共振频率$f_1$。当示波器荧光屏上出现共振现象时 (正弦波振幅突然变大)，再十分缓慢的微调频率调节细调旋钮，使波形振幅达到极大值。鉴频就是对测试共振模式及振动级次的鉴别，它是准确测量操作中的重要一步。在作频率扫描时，我们会发现测试棒不只在一个频率处发生共振现象，而所用公式只适用于基频共振的情况，所以要确认测试棒是在基频频率下共振。我们可用阻尼法来鉴别: 若沿测试棒长度的方向轻触棒的不同部位，同时观察示波器，在波节处波幅不变化，而在波腹处，波幅会变小，并发现在测试棒上有两个波节时，这时的共振就是在基频频率下的共振，从频率显示屏上显示的频率值$f_1$。
+    \item 在测量好$20\unit{mm}$处后，再分别按$x=25\unit{mm}$、$x=30\unit{mm}$、$x=35\unit{mm}$、$x=45\unit{mm}$、$x=50\unit{mm}$、$x=55\unit{mm}$、$x=60\unit{mm}$进行测量并记录。我又多测量了两组数据，分别是$x=15\unit{mm}$和$x=65\unit{mm}$。
+\end{enumerate}
+
+\section{实验数据}
+
+样品：铸铁，长度$L=80.3\unit{mm}$，直径$d=5.46\unit{mm}$，质量$m=39.67\unit{g}$。
+实验测得的数据如下表：
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|}
+        \hline
+        序号&1&2&3&4&5&6&7&8\\
+        \hline
+        悬挂点位置x(mm)&20    & 25    & 30    & 35    & 45    & 50    & 55    & 60 \\
+        \hline
+        x/L&0.249  & 0.311  & 0.374  & 0.436  & 0.560  & 0.623  & 0.685  & 0.747\\
+        \hline
+        共振频率$f_1$(Hz)&829.499  & 827.300  & 825.720  & 825.380  & 825.319  & 825.489  & 825.820  & 826.160\\
+        \hline
+    \end{tabular}
+    \caption{动态法测量基频大小结果}
+\end{table}
+
+我们通过测得$f_1$的大小进行绘图, 结果用三阶多项式处理近似之后，如图:
+
+\begin{figure}[H]
+    \centering
+    \caption{动态法测量基频绘图}
+    \includegraphics[height=8cm]{动态悬挂法作图.png}
+\end{figure}
+
+可以看出，$x=0.494L$时，$f_1$取极小值，所以我们可以认为此时的共振频率为基频共振频率，即$f_1 = 825.06 \unit{Hz}$.
+
+杨氏模量的计算结果为: 
+\[
+    Y = 1.6067 \frac{L^3mf_1^2}{d^4} = 1.6067\times \frac{(80.3\times 10^{-3})^3 \times 39.67\times 10^{-3} \times 825.06^2}{(5.46\times 10^{-3})^4} = 15.73\times 10^{10} \unit{m^{-1} \cdot kg \cdot s^{-2}}
+\]
+
+和理论值的误差大约在$\dfrac{|15.73 \cdot 10^{10} - 18.15\cdot 10^{10}|}{18.15\cdot 10^{10}} = 13.3\%$
+
+\section{思考题}
+
+\begin{enumerate}
+    \item 外延测量法有什么特点？使用时应注意什么问题？
+    
+    外延测量法可以测量难以通过直接实验进行测量的物理量。如本次实验若要测量测试棒的基频共振频率，只能将悬线挂在 0.224L 和 0.776L 节点处，但该节点处的振动幅度几乎为零，很难激振和检测，故采用外延测量法。以增加拟合准确率，并且要根据图像趋势或理论预期选择合适的拟合曲线。
+    
+    \item 物体的固有频率和共振频率有什么不同？它们之间有何关系？
+    
+    固有频率是由材料本身的性质决定的，而共振频率与实验条件（如：材料受到的阻尼以及材料自身的阻尼）有关，但是在当前的实验条件下固有频率近似等于共振频率。
+
+\end{enumerate}
+
+\section{实验总结}
+
+杨氏模量实验总体来说工程量是比较艰巨的，需要处理大量的实验数据，计算过程也比较繁杂，需要十分细心且耐心地操作。本次实验中，我学习到了不确定度的概念与计算，这为有助于更精确地分析实验数据，对以后的实验是大有帮助的。
+
+\section{实验原始数据记录表}
+
+手绘的拟合曲线也包含在了原始数据记录表中。
+
+\begin{figure}[H]
+    \centering
+    \caption{实验数据p1}
+    \includegraphics[width=16cm]{01.jpg}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \caption{实验数据p2}
+    \includegraphics[width=16cm]{02.jpg}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \caption{实验数据p3}
+    \includegraphics[width=16cm]{03.jpg}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \caption{实验数据p4}
+    \includegraphics[width=16cm]{04.jpg}
+\end{figure}
+
+
+\end{document}

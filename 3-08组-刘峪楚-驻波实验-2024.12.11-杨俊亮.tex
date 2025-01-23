@@ -1,0 +1,560 @@
+% 本模板根据中国科学院大学本科生公共必修课程《基础物理实验》Word模板格式编写
+% 本模板由Shing-Ho Lin和Jun-Xiong Ji于2022年9月共同完成, 旨在方便LaTeX原教旨主义者和被Word迫害者写实验报告, 避免Word文档因插入过多图与公式造成卡顿. 
+% 如有任何问题, 请联系: linchenghao21@mails.ucas.ac.cn
+% This is the LaTeX template for experiment report of Experimental Physics courses, based on its provided Word template. 
+% This template is completed by the joint collabration of Shing-Ho Lin and Junxiong Ji in September 2022. 
+% Adding numerous pictures and equations leads to unsatisfying experience in Word. Therefore LaTeX is better. 
+% Feel free to contact us via: linchenghao21@mails.ucas.ac.cn
+
+\documentclass[11pt]{article}
+
+\usepackage[a4paper]{geometry}
+\geometry{left=2.0cm,right=2.0cm,top=2.5cm,bottom=2.5cm}
+
+\usepackage{ctex} % 支持中文的LaTeX宏包
+\usepackage{amsmath,amsfonts,graphicx,subfigure,amssymb,bm,amsthm,mathrsfs,mathtools,breqn} % 数学公式和符号的宏包集合
+\usepackage{algorithm,algorithmicx} % 算法和伪代码的宏包
+\usepackage[noend]{algpseudocode} % 算法和伪代码的宏包
+\usepackage{fancyhdr} % 自定义页眉页脚的宏包
+\usepackage[framemethod=TikZ]{mdframed} % 创建带边框的框架的宏包
+\usepackage{fontspec} % 字体设置的宏包
+\usepackage{adjustbox} % 调整盒子大小的宏包
+\usepackage{fontsize} % 设置字体大小的宏包
+\usepackage{tikz,xcolor} % 绘制图形和使用颜色的宏包
+\usepackage{multicol} % 多栏排版的宏包
+\usepackage{multirow} % 表格中合并单元格的宏包
+\usepackage{makecell} % 单元格中换行的宏包
+\usepackage{diagbox} % 表格斜线的宏包
+\usepackage{pdfpages} % 插入PDF文件的宏包
+\RequirePackage{listings} % 在文档中插入源代码的宏包
+\RequirePackage{xcolor} % 定义和使用颜色的宏包
+\usepackage{wrapfig} % 文字绕排图片的宏包
+\usepackage{bigstrut,multirow,rotating} % 支持在表格中使用特殊命令的宏包
+\usepackage{booktabs} % 创建美观的表格的宏包
+\usepackage{circuitikz} % 绘制电路图的宏包
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+\lstset{
+  frame=tb,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  framerule=1pt,
+  rulecolor=\color{gray!35},
+  backgroundcolor=\color{gray!5},
+  basicstyle={\small\ttfamily},
+  numbers=none,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{blue},
+  commentstyle=\color{dkgreen},
+  stringstyle=\color{mauve},
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=3,
+}
+
+% 轻松引用, 可以用\cref{}指令直接引用, 自动加前缀. 
+% 例: 图片label为fig:1
+% \cref{fig:1} => Figure.1
+% \ref{fig:1}  => 1
+\usepackage[capitalize]{cleveref}
+% \crefname{section}{Sec.}{Secs.}
+\Crefname{section}{Section}{Sections}
+\Crefname{table}{Table}{Tables}
+\crefname{table}{Table.}{Tabs.}
+
+\setmainfont{Times New Roman}
+\setCJKmainfont{黑体}
+\setCJKsansfont{宋体}
+\setCJKmonofont{仿宋}
+\punctstyle{kaiming}
+% 偏好的几个字体, 可以根据需要自行加入字体ttf文件并调用
+
+\renewcommand{\emph}[1]{\begin{kaishu}#1\end{kaishu}}
+
+\newcommand*{\unit}[1]{\mathop{}\!\mathrm{#1}}
+\newcommand*{\dif}{\mathop{}\!\mathrm{d}}%微分算子 d
+\newcommand*{\pdif}{\mathop{}\!\partial}%偏微分算子
+\newcommand*{\cdif}{\mathop{}\!\nabla}%协变导数、nabla 算子
+\newcommand*{\laplace}{\mathop{}\!\Delta}%laplace 算子
+\newcommand*{\deriv}[2]{\frac{\mathrm{d} #1}{\mathrm{d} {#2}}}
+\newcommand*{\derivh}[3]{\frac{\mathrm{d}^{#1} #2}{\mathrm{d} {#3^{#1}}}}
+\newcommand*{\pderiv}[2]{\frac{\partial #1}{\partial {#2}}}
+\newcommand*{\pderivh}[3]{\frac{\partial^{#1} #2}{\partial {#3^{#1}}}}
+\newcommand*{\mcelsius}{\unit{\prescript{\circ}{}C}}
+%改这里可以修改实验报告表头的信息
+\newcommand{\experiName}{弦上驻波及介质中声速测量}
+\newcommand{\supervisor}{杨俊亮}
+\newcommand{\name}{刘峪楚}
+\newcommand{\studentNum}{2023K8009929030}
+\newcommand{\class}{3}
+\newcommand{\group}{08}
+\newcommand{\seat}{2}
+\newcommand{\dateYear}{2024}
+\newcommand{\dateMonth}{12}
+\newcommand{\dateDay}{11}
+\newcommand{\room}{721}
+\newcommand{\others}{$\square$}
+%% 如果是调课、补课, 改为: $\square$\hspace{-1em}$\surd$
+%% 否则, 请用: $\square$
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\chapter}[2]{\begin{center}\bf\Large{第#1部分\quad #2}\end{center}}
+
+\begin{document}
+
+%若需在页眉部分加入内容, 可以在这里输入
+% \pagestyle{fancy}
+% \lhead{\kaishu 测试}
+% \chead{}
+% \rhead{}
+
+\begin{center}
+    \LARGE \bf 《\, 基\, 础\, 物\, 理\, 实\, 验\, 》\, 实\, 验\, 报\, 告
+\end{center}
+
+\begin{center}
+    \noindent \emph{实验名称}\underline{\makebox[25em][c]{\experiName}}
+    \emph{指导教师}\underline{\makebox[8em][c]{\supervisor}}\\
+    \emph{姓名}\underline{\makebox[6em][c]{\name}} 
+    % 如果名字比较长, 可以修改box的长度"6em"
+    \emph{学号}\underline{\makebox[10em][c]{\studentNum}}
+    \emph{分班分组及座号} \underline{\makebox[5em][c]{\class \ -\ \group \ -\ \seat }\emph{号}} （\emph{例}:\, 1\,-\,04\,-\,5\emph{号}）\\
+    \emph{实验日期} \underline{\makebox[3em][c]{\dateYear}}\emph{年}
+    \underline{\makebox[2em][c]{\dateMonth}}\emph{月}
+    \underline{\makebox[2em][c]{\dateDay}}\emph{日}
+    \emph{实验地点}\underline{{\makebox[4em][c]\room}}
+    \emph{调课/补课} \underline{\makebox[3em][c]{\others\ 是}}
+    \emph{成绩评定} \underline{\hspace{5em}}
+    {\noindent}
+    \rule[8pt]{17cm}{0.2em}
+\end{center}
+
+\section{实验目的}
+
+\subsection{弦上驻波实验}
+
+1. 观察在两端固定的弦线上形成的驻波现象，了解弦线达到共振和形成稳定驻波的条件；
+
+2. 测定弦线上横波的传播速度；
+
+3. 用实验的方法确定弦线作受迫振动时共振频率与半波长个数n、弦线有效长度、张力及弦密度之间的关系；
+
+4. 用对数作图和最小乘法对共振频率与张力关系的实验结果作线性拟合，处理数据，并给出结论。
+
+\subsection{测量介质中声速}
+
+1. 利用驻波法测定波长；
+
+2. 利用相位法测定波长；
+
+3. 计算超声波在空气中和水中的传播速率。
+
+\section{实验仪器}
+
+\subsection{弦上驻波实验}
+
+由弦音计、信号发生器和双踪示波器三部分组成，同时还会用到天平、游标卡尺和刻度尺。
+
+\begin{enumerate}
+
+    \item 弦音计由吉他弦、固定吉他弦的支架和基座、琴码、砝码支架、驱动线圈、探测线圈和砝码等组成. 驱动线圈和探测线圈是本装置的重要部分, 其中驱动线圈通过信号发生器提供一定频率的功率信号产生交变磁力, 使得金属弦线振动；探测线圈将弦线的振动转换为电信号, 通过示波器进行观察。
+    
+    \begin{figure}[H]
+        \begin{minipage}[t]{0.6\linewidth}
+            \centering
+            \includegraphics[height=3.5cm]{弦音计实验装置.jpg}
+            \caption{弦音计实验装置图}
+        \end{minipage}
+        \begin{minipage}[t]{0.39\linewidth}
+            \centering
+            \includegraphics[height=3.5cm]{弦线所受张力.jpg}
+            \caption{弦线所受张力示意图}
+        \end{minipage}
+    \end{figure}
+
+    \item 信号发生器为低频功率信号发生器, 其输出信号的频率从$10\unit{Hz}$到$1\unit{kHz}$, 用于提供上述频率范围中具有一定功率的正弦信号, 以驱动线圈运动。
+	
+    \item 双踪示波器用于观察信号源的波形并显示由探测线圈接收到的弦线振动的波形, 以便观察弦线的振动。
+
+\end{enumerate}
+
+\subsection{测量介质中声速}
+
+SW-2型声速测量仪、信号发生器和示波器。其中SW-2型声速测量仪的右侧安装了超声信号发射端，是固定端；左侧为超声信号接收端，是移动端，其可以通过鼓轮移动，具体的移动位置可以通过标尺读取。
+
+\section{实验原理}
+
+\subsection{弦上驻波实验}
+
+将一弦线两端固定并绷紧. 在一端使弦线作振幅恒定的简谐振动, 使连续的横波波列传播向另一端; 前进波传播到另一端时反射, 反向传播, 回到原端点时又反, 使弦线上有前进波和无数反射波. 如果弦线的长度与波长之间满足某种关系, 使得前进波与许多反射波都具有相同的相位时, 弦线上各点作振幅各自恒定的简谐振动. 那么弦线上有些点振动振幅最大, 成为波腹; 有些点的振幅为零, 成为波节, 形成驻波现象. 
+
+相邻两波节 (或波腹) 的间隔距离$D$为波长$\lambda$的一半, 称为半波长, 即$D=\frac{\lambda}{2}$. 由于弦线两端固定, 故而弦线两端均为波节, 那么弦线长度应为半波长的整数倍, 记弦线长度为$L$, 则
+\[
+    L = nD = \frac{n\lambda}{2} \Longrightarrow \lambda = \frac{2L}{n} \qquad n=1,2,3,\,\cdots
+\]
+
+设振动频率为$f$, 则横波沿弦线的传播速度为$v=f\lambda$, 根据波动理论, 记拉紧的弦上张力为$T$, 弦线线密度为$\mu$, 波在传播方向 (与弦线平行) 的位置坐标为$x$, 振动位移为$y$, 那么沿弦线传播的横波应满足运动方程如下: 
+\[
+    \pderivh{2}yt = \frac{T}{\mu} \pderivh{2}yx  \qquad  \pderivh{2}yt = v^2\pderivh{2}yx
+\]
+进而可以得到波的传播速度满足
+\[
+    v = \sqrt{\frac{T}{\mu}}
+\]
+对比其与$v = f\lambda$之间的差异, 分析理论值与测量值间的区别. 
+
+另外, 频率与张力、线密度间的关系为:
+\[
+    f = \frac{1}{\lambda} \sqrt{\frac T\mu}
+\]
+两边同时取对数, 则有
+\begin{equation}
+    \log\lambda = \frac{1}{2}\log T - \frac{1}{2}\log\mu - \log f
+\end{equation}
+这样, 测量得到的数据绘图后, 我们应当能得到$\log\lambda$-$\log f$图像上的斜率为$-1$的直线. 这能验证$\lambda \propto f^{-1}$.
+
+弦线上的波长可利用驻波原理测量. 当两个振幅和频率相同的相干波在同一直线上相向传播时, 其所叠加而成的波称为驻波, 一维驻波是波干涉中的一种特殊情形. 在弦线上出现许多静止点, 称为驻波的波节, 相邻两波节间的距离为半个波长. 
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[height=2.5cm]{驻波.png}
+    \caption{驻波示意图}
+\end{figure}
+
+\subsection{测量介质中声速}
+
+\subsubsection{驻波法测声速}
+
+将信号发生器输出的正弦信号接到SW-2型声速测量仪的超声发射换能器上，电压信号可以通过电声信号转换为超声波并发射出去，并在接受换能器上再讲超声波变为电压信号，被示波器所读取。
+
+在接收面和发生面严格平行的条件下，声波发生垂直反射，此时入射波、反射波发生干涉效应，形成驻波。转动鼓轮，改变两只换能器间的距离，在一系列特定的距离上，将会出现稳定驻波。记录出现最大电压数值时标尺上的刻度，相邻两次最大值对应的刻度值之差即为半波长。频率$f$已知。经由上述方式测得波长$\lambda$，则可根据公式$v = \lambda f$可算出超声波的传播速度$v$。
+
+\subsubsection{相位法测声速}
+
+将发射波和接收波同时输入示波器, 以X-Y模式显示, 两波的频率相同, 相位不同. 当接受点与发射点的距离变化恰等于波长的整数倍时，相位差为$2\pi$的整数倍，等效为相位差为$0$。实验过程中，通过改变发射器和接收器之间的距离，观察李萨如图形的变化进而观察相位变化，比如当相位改变$\pi$时，相应距离的改变量即为半波长，根据公式$v = \lambda f$可求出波速$v$。
+
+相位变化时, 部分李萨如图形如下: 
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[height=5cm]{李萨如图形.jpg}
+    \caption{不同相位的李萨如图形}
+\end{figure}
+
+另外，可以利用声速在空气中的理论公式可以计算空气中声速的理论值: 
+\[
+    v = v_0 \sqrt{\frac{T}{T_0}} = v_0 \sqrt{1 + \frac{t}{273.15}}
+\]
+其中$T = (t+273.15) \unit{K}$, $v_0 = 331.45 \unit{m\cdot s^{-1}}$, 为$0 \mcelsius$时的声速, $t$为摄氏温度. 
+
+
+\section{实验内容}
+
+\subsection{弦上驻波实验}
+
+1. 调节仪器。将信号发生器的一个端口和示波器的一个通道连接，并将探测线圈连接到示波器的另一通道。
+
+2. 线密度测试。测量弦线的线密度$\mu$，由于不能将弦音计装置上的弦线卸下测量，所以只取吉他弦中段约$70~80cm$的专用样品测量线密度。测出样品质量$m$和弦线长$L$，线密度为：$\mu=\dfrac{m}{L}$。
+
+3. 波速的测量。固定弦上张力$T$与波的有效长度$L$, 调节信号发生器的输出频率, 观察在两端固定的弦线上形成的有$n\; (n=1,2,3,\cdots)$个波腹的稳定驻波。然后开始测量波的传播速度：根据实验原理，一是利用公式$\displaystyle v=\sqrt{\frac{T}{\mu}}$。二是先测$\lambda$再根据$v=f\lambda$求解。分别用这两种方法测量并比较。
+
+4. 频率和有效长度的关系。固定弦线线密度$\mu$与弦线张力$T$, 确定弦线作受迫振动时的共振频率$f$ (只取基频, 即$n=1$) 与弦线有效长度$L$之间的关系, 并记录数据。
+
+5. 频率和张力的关系。固定弦线线密度$\mu$与弦线有效长度$L$, 确定弦线作受迫振动时的共振频率$f$ (只取基频, 即$n=1$) 与弦线张力$T$之间的关系, 并记录数据。
+
+6. 频率和线密度的关系。固定弦线张力$T$、弦线有效长度$L$, 确定弦线作受迫振动时的共振频率$f$ (只取基频, 即$n=1$) 与弦线线密度$\mu$之间的关系, 并记录数据。
+
+\subsection{测量介质中声速}
+
+依次用驻波法和相位法来分别测量超声波在空气中的波速，然后用驻波法测量超声波在水中的波速。并进行数据处理与分析。
+
+\section{实验数据}
+
+\subsection{弦上驻波实验}
+
+\subsubsection{线密度测试}
+
+实验测得的弦的相关数据如下表：
+
+\begin{table}[!ht]
+    \centering
+    \begin{tabular}{|l|l|l|l|l|}
+    \hline
+        弦号 & 质量（g） & 长度（mm） & 直径（mm） & 线密度（kg/m） \\ \hline
+        2 & 0.191 & 57.50 & 0.849 & 0.00332 \\ \hline
+    \end{tabular}
+\caption{线密度测试}
+\end{table}
+
+\subsubsection{波速的测量}
+
+将琴码放置于$150\unit{mm}$和$650\unit{mm}$处，则弦线有效长度$L=500\unit{mm}$。不同频率$f_n\,(n=1,2,3)$对应的波长$\lambda=\dfrac{2L}{n}$, 故而$f_1,f_2,f_3$对应波速公式分别为$v_1=2Lf_1,\,v_2=Lf_2,\,v_3=\dfrac{2Lf_3}{3}$, 据此可测得波速。弦右端受到大小为$kmg \,(k = 2,3,4)$的拉力, 弦上张力$T = \dfrac{1}{2}kmg$。实验测得砝码质量$m = 580.41\unit{g}$, 再根据$v = \sqrt{\dfrac{T}{\mu}}$可计算得到波速。具体数据如下表：
+
+\begin{table}[H]
+    \centering
+    \caption{波速的测试}
+    \begin{tabular}{|c|c|c|c|c|c|c|c|}
+        \hline
+        砝码位置& $f_1 \unit{(Hz)}$ & $f_2 \unit{(Hz)}$ &$ f_3 \unit{(Hz)}$ &波速($v=\lambda f$)&张力(T)&波速($v=\sqrt{T/\mu})$\\ \hline
+        2     & 37.72  & 76.11  & 108.90  & 37.36  & 4.98  & 38.73  \\ 
+        \hline
+        3     & 45.03  & 90.65  & 137.17  & 45.36  & 7.47  & 47.43  \\ 
+        \hline
+        4     & 52.86  & 105.01  & 158.66  & 52.75  & 9.96  & 54.77  \\ 
+        \hline
+    \end{tabular}
+\end{table}
+
+在误差允许范围内，两种方法得到的波速大小可看作相等。
+
+测出的波节见图5，由于振动频率较高，故而普通手机较难清晰拍出，但是还是容易看到，振动的地方较粗，而波节所在地方较细。
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=8cm]{波节.jpg}
+\caption{波节}
+\end{figure}
+
+
+
+
+
+
+
+\subsubsection{频率和有效长度的关系}
+
+固定砝码于第2格，改变有效长度，观察基频$f_1$的变化，测得的数据列表见表3：
+
+\begin{table}[H]
+    \centering
+    \caption{频率与有效长度的关系}
+    \begin{tabular}{|c|c|c|c|c|c|}
+        \hline
+        $L$(mm)&640&480&320&240&160\\
+        \hline
+        $f_1$(Hz)&35.18  & 39.40  & 61.84  & 80.09  & 115.27  \\
+        \hline
+        $\ln f_1$&3.560  & 3.674  & 4.125  & 4.383  & 4.747  \\
+        \hline
+        $\lambda$(mm)&1280&960&640&480&320\\
+        \hline
+        $\ln \lambda$&0.247  & -0.041  & -0.446  & -0.734  & -1.139  \\
+        \hline
+    \end{tabular}
+\end{table}
+
+对$\lambda$和$f_1$取对数后作图。如下图所示：
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[height=7cm]{频率与有效长度的关系.png}
+    \caption{频率与有效长度的关系}
+\end{figure}
+
+拟合直线的$R^2 = 0.989$，十分接近于1，证明线性相关性很好。根据公式, 我们可以得知$\ln \lambda$-$\ln f_1$图像的斜率应为$-1$左右, 符合实验数据, 误差为$\dfrac{1.1071-1}{1} = 10.71\%$，有一定的误差，但总体来看实验比较成功。
+
+\subsubsection{频率和张力的关系}
+
+固定有效长度$L = 400mm$，即将琴码放到$200mm,600mm$的地方，然后改变砝码的位置，将其分别置于$1-5$号格，测量基频$f_1$。实验数据如下表：
+
+\begin{table}[H]
+    \centering
+    \caption{频率与张力的关系}
+    \begin{tabular}{|c|c|c|c|c|c|}
+        \hline
+        位置&1&2&3&4&5\\
+        \hline
+        T(N)&2.49  & 4.98  & 7.47  & 9.96  & 12.46  \\
+        \hline
+        $f_1$(Hz)&33.99  & 49.54  & 61.41  & 72.04  & 80.49  \\
+        \hline
+        $\ln T$&0.913  & 1.606  & 2.011  & 2.299  & 2.522  \\
+        \hline
+        $\ln f_1$&3.526  & 3.903  & 4.118  & 4.277  & 4.388  \\
+        \hline
+    \end{tabular}
+\end{table}
+
+对$T$和$f_1$取对数后作图。如下图所示：
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[height=7cm]{频率与张力的关系.png}
+    \caption{频率与张力的关系}
+\end{figure}
+
+拟合直线的$R^2 = 0.9999$，几乎接近于1，说明线性相关性极好。根据公式，我们可以得知$\ln T$-$\ln f_1$图像的斜率应为$2$左右, 符合实验数据, 误差为$\dfrac{2-1.861}{2} = 6.95\%$。相比前一个实验更加精确。
+
+\subsubsection{频率和线密度的关系}
+
+固定有效长度为$L=400mm$，将琴码放到$200mm,600mm$的位置，同时将砝码固定于第二格的位置，和同组的其余同学交换数据，得到的结论数据如下表：
+
+\begin{table}[H]
+    \centering
+    \caption{频率与线密度的关系}
+    \begin{tabular}{|c|c|c|c|c|c|}
+        \hline
+        弦号&4     & 2     & 10    & 3     & 12 \\
+        \hline
+        直径(mm)&0.828 & 0.849 & 0.791 & 1.041 & 1.061 \\
+        \hline
+        $\mu$(kg/m)&0.00347  & 0.00332  & 0.00360  & 0.00513  & 0.00539  \\
+        \hline
+        $f_1$(Hz)&33.10  & 33.99  & 37.85  & 42.84  & 48.27  \\
+        \hline
+        $\ln \mu$&-5.664  & -5.708  & -5.627  & -5.273  & -5.223  \\
+        \hline
+        $\ln f_1$&3.500  & 3.526  & 3.634  & 3.757  & 3.877  \\
+        \hline
+    \end{tabular}
+\end{table}
+
+对$\mu$和$f_1$取对数后作图。如下图所示：
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[height=7cm]{频率与线密度的关系.png}
+    \caption{频率与线密度的关系}
+\end{figure}
+
+拟合直线的$R^2 = 0.9014$，距离1虽然不远但仍有一定距离。而且斜率$k = 1.3838$，根据公式，我们可以得知$\ln \mu$-$\ln f_1$图像的斜率应为$2$左右, 误差为$\dfrac{2 - 1.3838}{2} = 30.81\%$。与前面的几个实验相比，这个实验的误差较大。原因可能是不同同学做实验的精确度不一样，大家的测量手法、读数准确程度多种多样，因此这个实验误差较大。
+
+\subsection{测量介质中声速}
+
+\subsubsection{测量空气中超声波波速}
+
+调节频率为$f=40kHz$，测得室温为$t=24.7 \mcelsius$，此时的声速理论值为\begin{displaymath}v=v_0\sqrt{1+\frac{t}{273.15}}\approx 346.1117 m/s\end{displaymath}
+
+测得的数据如下表：
+
+\begin{table}[H]
+    \centering
+    \caption{空气中超声波波速的测试}
+    \begin{tabular}{|c|c|c|c|c|}
+        \hline
+        i&驻波法$L_i$(mm)&$\lambda_i$(mm)&相位法$L_i$(mm)&$\lambda_i$(mm)\\
+        \hline
+        1&25.982  & 8.7480  & 28.991  & 8.7244 \\
+        \hline
+        2&30.354  & 8.7368  & 33.130  & 8.7808 \\
+        \hline
+        3&34.701  & 8.7388  & 37.694  & 8.6636 \\
+        \hline
+        4&39.033  & 8.7488  & 42.069  & 8.6632 \\
+        \hline
+        5&43.300  & 8.8444  & 46.417  & 8.6964 \\
+        \hline
+        6&47.852  &$\bar{\lambda}$(mm)&50.802&$\bar{\lambda}$(mm)\\
+        \hline
+        7&52.196&\multirow{4}{*}{8.76340}&55.082&\multirow{4}{*}{8.70568}\\
+        \cline{1-2}\cline{4-4}
+        8&56.548&&59.353&\\
+        \cline{1-2}\cline{4-4}
+        9&60.905&&63.727&\\
+        \cline{1-2}\cline{4-4}
+        10&65.411&&68.158&\\
+        \hline
+    \end{tabular}
+\end{table}
+
+经过计算，使用驻波法和相位法分别得到的超声波在空气中的波速为: $350.5344 \unit{m\cdot s^{-1}}$和$348.2272 \unit{m\cdot s^{-1}}$. 计算与理论值的误差, 分别为 $\dfrac{350.5344 - 346.1117}{346.1117} = 1.278\%$ 与$\dfrac{348.2272 - 346.1117}{346.1117} = 0.611\%$。两种方法的误差都不大，但是相位法效果更佳。
+
+此处附上相位法测试时的屏幕照片：
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[height=7cm]{相位法测试显示屏.jpg}
+    \caption{相位法测试时屏幕图片}
+\end{figure}
+
+\subsubsection{测量水中超声波波速}
+
+我采用驻波法测量水中超声波波速。选取$f=1.7MHz$，在室温仍为$24.7 \mcelsius$的条件下进行测量，结果如下表：
+
+\begin{table}[H]
+    \centering
+    \caption{水中超声波波速的测试}
+    \begin{tabular}{|c|c|c|}
+        \hline
+        i&刻度值Li(mm)&$\lambda_i$(mm)\\
+        \hline
+        1&16.921  & 0.8168 \\
+        \hline
+        2&17.304  & 0.8392 \\
+        \hline
+        3&17.711  & 0.8312 \\
+        \hline
+        4&18.130  & 0.8368 \\
+        \hline
+        5&18.525  & 0.8592 \\
+        \hline
+        6&18.963&$\bar{\lambda}$(mm)\\
+        \hline
+        7&19.402&\multirow{4}{*}{0.83664}\\
+        \cline{1-2}
+        8&19.789&\\
+        \cline{1-2}
+        9&20.222&\\
+        \cline{1-2}
+        10&20.673&\\
+        \hline
+    \end{tabular}
+\end{table}
+
+经过计算，使用驻波法得到的超声波在水中的波速为: $1422.288 \unit{m\cdot s^{-1}}$. 考虑到水中声速大约为$1500 \unit{m\cdot s^{-1}}$, 测量偏差大约在$5 \%$，误差原因可能是实验用的水槽中的水存放时间过长，其中溶解了许多杂质，影响了实验结果。
+
+\section{思考题}
+
+\subsection{调节振动源上的振动频率和振幅大小后对弦线振动会产生什么影响？}
+
+频率不变时，振幅大小与振动振幅成正比，而如果条件频率使其偏离共振频率，则驻波现象消失。
+
+\subsection{如何来确定弦线上的波节点位置？}
+
+通过观察弦的粗细：粗的部分是波腹，细的部分是波节。
+
+\subsection{在弦线上出现驻波的条件是什么？在实验中为什么要把弦线的振动调到驻波现在最稳定、最显著的状态？}
+
+出现驻波的条件是弦线的有效长度为半波长的整数倍。调节到最稳定的状态会方便观察波节的位置，方便实验的进行。
+
+\subsection{在弹奏弦线乐器时，发出声音的音调与弦线的长度、粗细、松紧程度有什么关系？为什么？}
+
+1. 弦越短，音调越高；弦越长，音调越低。弦越短，共振波长越短，共振频率越高。
+
+2. 弦越细，音调越高；弦越粗，音调越低。弦越细，线密度越低，共振频率越高。
+
+3. 弦越紧，音调越高；弦越松，音调越低。弦越紧，张力越大，共振频率越高。
+
+\subsection{若样品弦线与装置上的弦线直径略有差别，请判断是否需要修正，如何进行？}
+
+需要修正。若存在略微的差别，意味着样品弦与弦音计上的弦应该为同一根，很可能只是张力的形变导致弦线拉伸，这会导致线密度减小。拉伸过程中弦的体密度视作定值，那么记样品弦的直径为$D_0$，装置上弦的直径为$D$，则在样品的线密度上乘$\frac{D^2}{D_0^2}$。
+
+\subsection{对于某一共振频率，增大或减少频率的调节过程中，振幅最大的频率位置往往不同，如何解释这一现象？}
+
+人对振幅最大的判断存在主观误差。无论从大的一侧还是小的一侧接近共振频率，观察到的现象都是振幅逐渐变大，且接近共振频率时振幅变化不明显。因此变大到一定程度后人容易主观判断此时为最大频率。
+
+\section{实验总结}
+
+本次实验原理和实验操作都不是很复杂，但是实际实验中仍然出现了一些状况。例如在使用示波器时，由于一开始做实验读数时有些操之过急，导致了前面一点实验数据的不准确。这让我意识到做实验要有耐心，等到数据稳定时再去读数。
+
+\section{实验原始数据}
+
+\newpage
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=16cm]{实验数据1.jpg}
+\caption{第一页}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=16cm]{实验数据2.jpg}
+\caption{第二页}
+\end{figure}
+
+\end{document}

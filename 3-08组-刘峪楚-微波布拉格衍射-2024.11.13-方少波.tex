@@ -1,0 +1,608 @@
+% 本模板根据中国科学院大学本科生公共必修课程《基础物理实验》Word模板格式编写
+% 本模板由Shing-Ho Lin和Jun-Xiong Ji于2022年9月共同完成, 旨在方便LaTeX原教旨主义者和被Word迫害者写实验报告, 避免Word文档因插入过多图与公式造成卡顿. 
+% 如有任何问题, 请联系: linchenghao21@mails.ucas.ac.cn
+% This is the LaTeX template for experiment report of Experimental Physics courses, based on its provided Word template. 
+% This template is completed by the joint collabration of Shing-Ho Lin and Junxiong Ji in September 2022. 
+% Adding numerous pictures and equations leads to unsatisfying experience in Word. Therefore LaTeX is better. 
+% Feel free to contact us via: linchenghao21@mails.ucas.ac.cn
+
+\documentclass[11pt]{article}
+
+\usepackage[a4paper]{geometry}
+\geometry{left=2.0cm,right=2.0cm,top=2.5cm,bottom=2.5cm}
+
+\usepackage{ctex} % 支持中文的LaTeX宏包
+\usepackage{amsmath,amsfonts,graphicx,subfigure,amssymb,bm,amsthm,mathrsfs,mathtools,breqn} % 数学公式和符号的宏包集合
+\usepackage{algorithm,algorithmicx} % 算法和伪代码的宏包
+\usepackage[noend]{algpseudocode} % 算法和伪代码的宏包
+\usepackage{fancyhdr} % 自定义页眉页脚的宏包
+\usepackage[framemethod=TikZ]{mdframed} % 创建带边框的框架的宏包
+\usepackage{fontspec} % 字体设置的宏包
+\usepackage{adjustbox} % 调整盒子大小的宏包
+\usepackage{fontsize} % 设置字体大小的宏包
+\usepackage{tikz,xcolor} % 绘制图形和使用颜色的宏包
+\usepackage{multicol} % 多栏排版的宏包
+\usepackage{multirow} % 表格中合并单元格的宏包
+\usepackage{makecell} % 单元格中换行的宏包
+\usepackage{diagbox} % 表格斜线的宏包
+\usepackage{pdfpages} % 插入PDF文件的宏包
+\RequirePackage{listings} % 在文档中插入源代码的宏包
+\RequirePackage{xcolor} % 定义和使用颜色的宏包
+\usepackage{wrapfig} % 文字绕排图片的宏包
+\usepackage{bigstrut,multirow,rotating} % 支持在表格中使用特殊命令的宏包
+\usepackage{booktabs} % 创建美观的表格的宏包
+\usepackage{circuitikz} % 绘制电路图的宏包
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+\lstset{
+  frame=tb,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  framerule=1pt,
+  rulecolor=\color{gray!35},
+  backgroundcolor=\color{gray!5},
+  basicstyle={\small\ttfamily},
+  numbers=none,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{blue},
+  commentstyle=\color{dkgreen},
+  stringstyle=\color{mauve},
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=3,
+}
+
+% 轻松引用, 可以用\cref{}指令直接引用, 自动加前缀. 
+% 例: 图片label为fig:1
+% \cref{fig:1} => Figure.1
+% \ref{fig:1}  => 1
+\usepackage[capitalize]{cleveref}
+% \crefname{section}{Sec.}{Secs.}
+\Crefname{section}{Section}{Sections}
+\Crefname{table}{Table}{Tables}
+\crefname{table}{Table.}{Tabs.}
+
+\setmainfont{Times New Roman}
+\setCJKmainfont{黑体}
+\setCJKsansfont{宋体}
+\setCJKmonofont{仿宋}
+\punctstyle{kaiming}
+% 偏好的几个字体, 可以根据需要自行加入字体ttf文件并调用
+
+\renewcommand{\emph}[1]{\begin{kaishu}#1\end{kaishu}}
+
+\newcommand*{\unit}[1]{\mathop{}\!\mathrm{#1}}
+\newcommand*{\dif}{\mathop{}\!\mathrm{d}}%微分算子 d
+\newcommand*{\pdif}{\mathop{}\!\partial}%偏微分算子
+\newcommand*{\cdif}{\mathop{}\!\nabla}%协变导数、nabla 算子
+\newcommand*{\laplace}{\mathop{}\!\Delta}%laplace 算子
+\newcommand*{\deriv}[2]{\frac{\mathrm{d} #1}{\mathrm{d} {#2}}}
+\newcommand*{\derivh}[3]{\frac{\mathrm{d}^{#1} #2}{\mathrm{d} {#3^{#1}}}}
+\newcommand*{\pderiv}[2]{\frac{\partial #1}{\partial {#2}}}
+\newcommand*{\pderivh}[3]{\frac{\partial^{#1} #2}{\partial {#3^{#1}}}}
+\newcommand*{\mcelsius}{\unit{\prescript{\circ}{}C}}
+%改这里可以修改实验报告表头的信息
+\newcommand{\experiName}{微波布拉格衍射}
+\newcommand{\supervisor}{方少波}
+\newcommand{\name}{刘峪楚}
+\newcommand{\studentNum}{2023K8009929030}
+\newcommand{\class}{3}
+\newcommand{\group}{08}
+\newcommand{\seat}{2}
+\newcommand{\dateYear}{2024}
+\newcommand{\dateMonth}{11}
+\newcommand{\dateDay}{13}
+\newcommand{\room}{715}
+\newcommand{\others}{$\square$}
+%% 如果是调课、补课, 改为: $\square$\hspace{-1em}$\surd$
+%% 否则, 请用: $\square$
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\chapter}[2]{\begin{center}\bf\Large{第#1部分\quad #2}\end{center}}
+
+\begin{document}
+
+%若需在页眉部分加入内容, 可以在这里输入
+% \pagestyle{fancy}
+% \lhead{\kaishu 测试}
+% \chead{}
+% \rhead{}
+
+\begin{center}
+    \LARGE \bf 《\, 基\, 础\, 物\, 理\, 实\, 验\, 》\, 实\, 验\, 报\, 告
+\end{center}
+
+\begin{center}
+    \noindent \emph{实验名称}\underline{\makebox[25em][c]{\experiName}}
+    \emph{指导教师}\underline{\makebox[8em][c]{\supervisor}}\\
+    \emph{姓名}\underline{\makebox[6em][c]{\name}} 
+    % 如果名字比较长, 可以修改box的长度"6em"
+    \emph{学号}\underline{\makebox[10em][c]{\studentNum}}
+    \emph{分班分组及座号} \underline{\makebox[5em][c]{\class \ -\ \group \ -\ \seat }\emph{号}} （\emph{例}:\, 1\,-\,04\,-\,5\emph{号}）\\
+    \emph{实验日期} \underline{\makebox[3em][c]{\dateYear}}\emph{年}
+    \underline{\makebox[2em][c]{\dateMonth}}\emph{月}
+    \underline{\makebox[2em][c]{\dateDay}}\emph{日}
+    \emph{实验地点}\underline{{\makebox[4em][c]\room}}
+    \emph{调课/补课} \underline{\makebox[3em][c]{\others\ 是}}
+    \emph{成绩评定} \underline{\hspace{5em}}
+    {\noindent}
+    \rule[8pt]{17cm}{0.2em}
+\end{center}
+
+\section{实验目的}
+
+\begin{enumerate}
+  \item 了解与学习微波产生的基本原理以及传播和接收等基本特性。
+  \item 观测微波衍射、干涉等实验现象。
+  \item 观测模拟晶体的微波布拉格衍射现象。
+  \item 通过迈克耳逊实验测量微波波长。
+\end{enumerate}
+
+\section{实验仪器}
+
+DHMS-1A型微波光学综合实验仪一套，包括：X波段微波信号源、微波发生器、发射喇叭、接收喇叭、微波检波器、检波信号数字显示器、可旋转载物平台和支架，以及实验用附件（反射板、分束板、单缝板、双缝板（缝间距为$5$cm）、晶体模型（晶面直径为$4$cm） 、读数机构等）。
+
+\section{实验原理}
+
+\subsection{微波的产生和接收}
+
+微波是波长在 $1$mm-$1$m 之间的电磁波。微波发生器内部产生微波，并经过一些列操作将频率在8.8GHz-9.8GHz范围的微波发射出去。接收部分则由喇叭天线接收微波信号，传给检波管后转化为电信号并显示微波相对强度。通过在发生器和接收器之间加入一些装置，可进行对微波的一系列操作与测量。原理如下图所示：
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=6cm]{微波的产生.jpg}
+	\caption{微波的产生原理}
+\end{figure}
+
+\subsection{微波的双缝干涉实验}
+
+平面波垂直入射到一金属板的两条狭缝上，狭缝成为次级波源，产生两列可以干涉（频率相同、振动方向相同、振幅周期和相位关系稳定）的相干波，产生干涉现象，且为减少单缝衍射的干扰，令双缝的缝宽$a$接近波长$\lambda$，并扩大两缝间隔$b$小。设$\theta$是角度观测点和中心$0$级亮纹对双峰中心的夹角，则干涉加强的角度和干涉减弱的角度分别为：
+
+\begin{align*}
+	&\theta = \sin^{-1}{\left( \frac{k\cdot\lambda}{a+b} \right)} &k=0,1,2,3\,\cdots \text{ （干涉加强）} \\
+	&\theta = \sin^{-1}{\left( \frac{2k+1}{2}\cdot\frac{\lambda}{a+b} \right)} &k=0,1,2,3\,\cdots \text{ （干涉减弱）} \\
+\end{align*}
+
+\subsection{微波的迈克尔逊干涉实验}
+
+迈克尔逊干涉的图像设置仪器如图：使用一个半反射半透射的分束板将入射波分成两束光分别射向金属板A、B，并发生全反射返回分束板，分别发生透射、反射抵达微波接收器。干涉叠加的强度由这两束同频率波的光程差决定，金属板B每改变半个波长$\lambda$的位置，干涉条纹就移动一条。即在第$k$个最小条纹处，接收装置移动的距离$L$满足：
+
+\[
+L=k\cdot\frac{\lambda}{2}
+\]
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=6cm]{迈克尔逊干涉原理示意图.jpg}
+	\caption{微波的迈克尔逊干涉实验原理示意图}
+\end{figure}
+
+\subsection{微波布拉格衍射实验}
+
+组成晶体的原子或分子按一定规律在空间周期性排列。其中最简单的结构，是组成晶体的原子在直角坐标中沿$x,y,y$三个方向，按固定的距离$a$在空间依序重复排列，形成简单的立方点阵，如下图4所示，原子间距$a$称为晶格常数。组成晶体的原子可以看成分别作处在一系列相互平行而且间距一定的平面族上，这些平面称为晶面。常见的（也是本次实验需要做的，是$(100)$和$(110)$两种结构（其实也有$(111)$等）。
+
+晶面在$x,y,z$坐标轴上截距的倒数化为最小整数后的值记为$h,k,l$，也常被称作晶面指数，用以表征所取的晶面方向和形状，则相邻的两个晶面间距为:\begin{displaymath}d=\frac{a}{\sqrt{h^2+k^2+l^2}}\end{displaymath}常见的几种晶格类型可由下图所示，其中圆括号括起来的三个数分别表示$(hkl)$。
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=6cm]{立方晶格.png}
+	\caption{（a）立方晶格模型，（b）晶面指数。}
+\end{figure}
+
+电磁波入射到晶体要受到晶体的衍射，而二维光栅对光的衍射实质上是平面上各个小孔的衍射波相干叠加的结果。如今，取代平面上小孔的是三维空间中原子组成的格点，可看作是一个三维的光栅网络。晶体对电子波衍射的实质是每个格点上的原子产生的散射波的相干叠加。它们的相干叠加的第一步可看作是同一晶面上各个原子发出的散射波的相干叠加，形成每一个晶面的衍射波；第二步是同一晶面族的不同晶面的衍射波之间的相干叠加。
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=6cm]{散射.jpg}
+	\caption{（a）同一个晶面的散射波示意图 （b）不同晶面的散射波示意图}
+\end{figure}
+
+\subsection{微波的偏振实验}
+
+电磁波是横波，它的电场强度矢量 E 和波的传播方向垂直。如果 E 始终在垂直于传播方向的平面内某一确定方向变化，这样的横电磁波叫线极化波，在光学中也叫偏振光。发射的微波电场强度矢量 E 如在 P1 方向，经接收方向为 P2 的接收器后（发射器与接收器类似起偏器和检偏器），其强度$I = I_0\cos^2{\alpha}$，其中$\alpha$是两者之间的夹角。这就是光学中的马吕斯（Malus）定律，在微波测量中同样适用。
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=6cm]{马吕斯定律.png}
+	\caption{马吕斯定律示意图}
+\end{figure}
+
+\section{实验内容}
+
+\subsection{微波的产生和接收}
+
+接通电源并调节频率，实验中需要测量$9.4$GHz的微波，对应的波长为$3.19$cm，而微波发生器上标注需要将调频旋钮调节至$6.76$处。
+
+确保实验台空间足够，能使微波接收器臂旋转$50$°，然后尽量让两个喇叭口正对，大致调节接收段示数为$100 \sim 150$mV；分别在$\pm20$°的位置，调节接收器的喇叭口使两个示数一致（偏差小于$2$mV）。之后拧紧螺丝，如果仪器发生转动，需要重新调整仪器。
+
+\subsection{微波的双缝干涉实验}
+
+调整双缝干涉板的缝宽为$3.5$cm，缝中间的间距为$5$cm。将双缝安置在支座上，使双缝板平面与载物圆台上$90$°指示线一致，并让微波的发生器、接收器夹角为$180$°。找到$0$线附近的最大值，并在$0$线的两侧每改变$2$°读取一次读数，近似绘制曲线；在曲线对应的一级极大、零级极小、一级极小处开展间隔$1$°的精细扫描，并根据测量角度$\theta$，缝宽$a$和缝间距$b$，计算微波波长$\lambda$和其百分误差。
+
+第一轮粗测，步长为$2$°，测量范围是$\pm 50 ^\circ$；第二轮在找好合适区间后，按照步长为$1$°测量。
+
+\subsection{微波的迈克尔逊干涉实验}
+
+使发射器、接收器的支撑臂分别对准$0$°和$90$°刻度线，使用两个短支柱安装反射板。然后使用玻璃板进行调节，使两个反射板垂直，并使其垂直于光路。再在载物圆台$45$°刻度线处放置一玻璃板。确保可移反射板移动至0cm刻度线处，开始测量。测出光强抵达最低点的位置，测量出共四个微波的最小点读数，不需要使用旋钮上的千分尺读数，估读至$0.1$mm即可。
+
+\subsection{微波的布拉格衍射实验}
+
+将模拟晶体安装在载物圆台上。分为$(1\,0\,0)$晶面和$(1\,1\,0)$晶面的两种测量。
+
+\begin{enumerate}
+  \item $(1\,0\,0)$晶面的测量。
+  
+  由于晶面的法线指向$90$°方向，我们需要使微波发生器对应的刻度线为$60$°，接收器对应$120$°，这时对应的入射角是$30$°，读取数据。每次测量后，将载物圆台逆时针旋转$2$°，转动臂逆时针旋转$2$°，测量下一个值，记录数值，直到入射角达到$80$°为止。完成测量后，在测量区间重复这一项操作，但旋转角度变为$1$°。
+  
+  \item $(1\,1\,0)$晶面的测量。
+  
+  由于晶面的法线指向$45$°方向，我们需要使微波发生器对应的刻度线为$15$°，接收器对应$75$°，这时对应的入射角是$30$°，读取数据后的方法与上一问相同，不同之处只有入射角达到$70$°即可停止测量。
+
+\end{enumerate}
+
+\subsection{微波的偏振实验}
+
+调整喇叭口面相互平行正对共轴。调整信号使显示器接近满度，然后旋转接收喇叭短波导的轴承环，每隔$10 ^\circ$记录检流计的读数，直至$90 ^\circ$。即可得到一组微波强度与偏振角度关系数据，验证马吕斯定律。
+
+注意，做实验时应尽量减少周围环境的影响。
+
+\section{实验数据}
+
+\subsection{微波的双缝干涉实验}
+
+\subsubsection{微波实验仪对准确认}
+
+正对喇叭口和正负$20^\circ$的示数如下：
+
+\begin{table}[H]
+  \centering
+	\begin{tabular}{|l|l|l|l|}
+		\hline
+		角度（$^\circ$）   & 0     & 20   & -20  \\ \hline
+		电压（mV） & 170.3 & 18.8 & 19.0 \\ \hline
+	\end{tabular}
+  \caption{微波实验仪对准确认}
+\end{table}
+
+可以看到，正负$20^\circ$的示数差别在$0.2\unit{mV}$以内，说明实验仪器的调整较为准确。
+
+\subsubsection{微波的双缝干涉实验}
+
+在$0^\circ$两侧，每隔$2^\circ$测量一次，得到的数据如下：
+
+\begin{table}[H]
+  \centering
+	\begin{tabular}{|l|l|l|l|l|l|l|l|l|l|}
+		\hline
+		$\theta(^\circ)$ & 0    & 2    & 4    & 6    & 8    & 10  & 12  & 14  & 16  \\ \hline
+		$U_{\theta+}(\unit{mV})$ &45.0  & 35.1  & 18.2  & 6.7   & 0.9   & 0.0   & 0.1   & 1.9   & 6.9 \\ \hline
+		$U_{\theta-}(\unit{mV})$ &45.0  & 33.8  & 23.1  & 10.2  & 1.0   & 0.2   & 0.6   & 2.5   & 6.0 \\ \hline
+		$\theta(^\circ)$ & 18 & 20   & 22   & 24   & 26   & 28  & 30  & 32  & 34  \\ \hline
+		$U_{\theta+}(\unit{mV})$ &10.7  & 15.9  & 23.9  & 19.0  & 6.6   & 1.3   & 0.6   & 1.0   & 1.3   \\ \hline
+		$U_{\theta-}(\unit{mV})$ &16.9  & 26.3  & 30.7  & 19.9  & 6.5   & 1.2   & 0.7   & 0.9   & 1.6   \\ \hline
+		$\theta(^\circ)$ & 36   & 38   & 40   & 42   & 44   & 46  & 48  & 50  &     \\ \hline
+		$U_{\theta+}(\unit{mV})$   &3.2   & 3.7   & 1.8   & 0.4   & 1.2   & 6.7   & 9.6   & 2.3   &       \\ \hline
+		$U_{\theta-}(\unit{mV})$   & 3.3   & 4.1   & 1.6   & 0.7   & 1.9   & 6.7   & 8.9   & 1.4   &  \\ \hline
+	\end{tabular}
+  \caption{微波的双缝干涉实验}
+\end{table}
+
+根据上表，绘制曲线图如下：
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=8cm]{微波双缝干涉光强分布.jpg}
+  \caption{双缝干涉光强分布图}
+\end{figure}
+
+从曲线图可以粗略得到：一级极大角度在$+22^\circ$和$-22^\circ$附近，零级极小角度在$+10^\circ$和$-10^\circ$附近，一级极小角度在$+30^\circ$和$-30^\circ$附近。因此在这些角度附近以$1^\circ$为步长进行精细扫描。
+
+\subsubsection{一级极大}
+
+扫描数据与图像如下：
+
+\begin{table}[H]
+  \centering
+	\begin{tabular}{|l|l|l|l|l|l|l|l|l|l|}
+		\hline
+    $\theta(^\circ)$ &18    & 19    & 20    & 21    & 22    & 23    & 24    & 25    & 26 \\ \hline
+		$U_{\theta+}(\unit{mV})$   & 13.1  & 17.7  & 21.2  & 24.8  & 25.9  & 22.7  & 18.7  & 13.9  & 7.9   \\ \hline
+		$U_{\theta-}(\unit{mV})$   &11.5  & 15.4  & 20.4  & 30.2  & 35.9  & 33.6  & 29.1  & 20.0  & 8.8   \\ \hline
+  \end{tabular}
+  \caption{一级极大}
+\end{table}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=8cm]{正角度一级极大.jpg}
+  \includegraphics[width=8cm]{负角度一级极大.jpg}
+  \caption{一级极大}
+\end{figure}
+
+通过数据与图像，可以得到一级极大角度：$\theta_+ = 22^\circ, \theta_- = 22^\circ$。
+
+根据干涉加强的角度公式，可以计算出微波波长:
+
+\[\lambda_{+1max} = (a+b)\sin{\theta} = (3.5+5)\times \sin{(22^\circ)}=3.184 \unit{cm}\]
+\[\lambda_{-1max} = (a+b)\sin{\theta} = (3.5+5)\times \sin{(22^\circ)}=3.184 \unit{cm}\]
+
+\subsubsection{零级极小}
+
+扫描数据与图像如下：
+
+\begin{table}[H]
+  \centering
+	\begin{tabular}{|l|l|l|l|l|l|l|l|l|l|}
+		\hline
+    $\theta(^\circ)$ &6     & 7     & 8     & 9     & 10    & 11    & 12    & 13    & 14  \\ \hline
+		$U_{\theta+}(\unit{mV})$   &4.6   & 2.8   & 1.6   & 0.4   & 0.0  & 0.5   & 0.9   & 1.5   & 2.7 \\ \hline
+		$U_{\theta-}(\unit{mV})$   &8.1   & 2.6   & 0.8   & 0.2   & 0.0 & 0.1   & 0.3   & 1.0   & 2.8    \\ \hline
+  \end{tabular}
+  \caption{零级极小}
+\end{table}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=8cm]{正角度零级极小.jpg}
+  \includegraphics[width=8cm]{负角度零级极小.jpg}
+  \caption{零级极小}
+\end{figure}
+
+通过数据与图像，可以得到零级极小角度：$\theta_+ = 10^\circ, \theta_- = 10^\circ$。
+
+根据干涉加强的角度公式，可以计算出微波波长:
+
+\[\lambda_{+0min} = 2(a+b)\sin{\theta} = 2 (3.5+5)\times \sin{(22^\circ)}=2.952 \unit{cm}\]
+\[\lambda_{-0min} = 2(a+b)\sin{\theta} = 2(3.5+5)\times \sin{(22^\circ)}=2.952 \unit{cm}\]
+
+\subsubsection{一级极小}
+
+扫描数据与图像如下：
+
+\begin{table}[H]
+  \centering
+	\begin{tabular}{|l|l|l|l|l|l|l|l|l|l|}
+		\hline
+    $\theta(^\circ)$ &26    & 27    & 28    & 29    & 30    & 31    & 32    & 33    & 34   \\ \hline
+		$U_{\theta+}(\unit{mV})$   &9.9   & 4.4   & 2.8   & 1.1   & 0.5   & 0.3   & 0.9   & 1.2   & 1.7   \\ \hline
+		$U_{\theta-}(\unit{mV})$   &10.1  & 4.5   & 2.0   & 1.1   & 0.8   & 0.9   & 1.0   & 1.3   & 1.8    \\ \hline
+  \end{tabular}
+  \caption{一级极小}
+\end{table}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=8cm]{正角度一级极小.jpg}
+  \includegraphics[width=8cm]{负角度一级极小.jpg}
+  \caption{一级极小}
+\end{figure}
+
+通过数据与图像，可以得到一级极小角度：$\theta_+ = 31^\circ, \theta_- = 30^\circ$。
+
+根据干涉加强的角度公式，可以计算出微波波长:
+
+\[\lambda_{+0min} = 2(a+b)\sin{\theta} = \frac{2}{3} (3.5+5)\times \sin{(22^\circ)}=2.919 \unit{cm}\]
+\[\lambda_{-0min} = 2(a+b)\sin{\theta} = \frac{2}{3} (3.5+5)\times \sin{(22^\circ)}=2.833 \unit{cm}\]
+
+根据上面六个波长的测量值，可得到波长的平均值：
+
+\[\lambda = \frac{3.184+3.184+2.952+2.952+2.919+2.833}{6}\approx 3.004 \text{ cm}\]
+
+与理论值的相对误差为：$\frac{|3.004 - 3.19|}{3.19} \times 100\% = 5.83\%$，误差不算很大，实验较为成功。
+
+\subsection{微波迈克尔逊干涉实验}
+
+测出光强抵达最低点的位置如下：
+
+\begin{table}[H]
+  \centering
+	\begin{tabular}{|l|l|l|l|l|}
+		\hline
+		最小点读数 & 1.61 & 3.25 & 4.81 & 6.37 \\ \hline
+	\end{tabular}
+\end{table}
+
+$x_1=1.61$,$ x_2=3.25\ ,\ x_3=4.81\ ,\ x_4=6.37\ $，对数据使用逐差法进行处理：
+
+\[\lambda = 2\Delta L = 2\cdot\frac{(x_3-x_1)+(x_4-x_2)}{4} = \frac{(4.81-1.61)+(6.37-3.25)}{2} \approx 3.16  cm\]
+
+相对误差：
+
+\[\frac{|3.16-3.19|}{3.19}\times100\%=0.94\%\]
+
+相对误差小于$1\%$，证明实验十分成功。
+
+\subsection{微波布拉格衍射实验}
+
+\subsubsection{$(100)$晶面的测量}
+
+面间距为$ d = 4\unit{cm} $，测量数据如下：
+
+\begin{table}[H]
+	\centering
+	\begin{tabular}{|l|l|l|l|l|l|l|l|l|l|}
+		\hline
+    $\varphi(^\circ)$ & 30   & 32  & 34   & 36  & 38  & 40   & 42   & 44   & 46   \\ \hline
+		$U(\unit{mV})$ & 76.3  & 55.8  & 35.1  & 18.5  & 3.1   & 1.1   & 0.2   & 0.9   & 4.9   \\ \hline
+		$\varphi(^\circ)$ & 48   & 50  & 52   & 54  & 56  & 58   & 60   & 62   & 64   \\ \hline
+		$U(\unit{mV})$ &11.7  & 14.4  & 26.3  & 30.5  & 37.0  & 36.0  & 65.1  & 129.7  & 169.6   \\ \hline
+		$\varphi(^\circ)$ & 66   & 68  & 70   & 72  & 74  & 76   & 78   & 80   &      \\ \hline
+		$U(\unit{mV})$ &168.9  & 151.8  & 128.3  & 92.8  & 67.9  & 66.0  & 76.6  & 118.9  &  \\ \hline
+	\end{tabular}
+	  \caption{$(100)$的微波布拉格衍射}
+\end{table}
+
+根据表格，绘制图像如下：
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=8cm]{100晶面.jpg}
+  \caption{$(100)$的微波布拉格衍射}
+\end{figure}
+
+从上表可以得到一级极大位于$64^\circ$附近，因此在$64^\circ$附近以$1^\circ$为步长进行精细扫描。扫描数据如下表：
+
+\begin{table}[H]
+	\centering 
+	\begin{tabular}{|l|l|l|l|l|l|l|l|l|l|}
+		\hline
+		$\varphi(°)$ &60    & 61    & 62    & 63    & 64    & 65    & 66    & 67    & 68 \\ \hline
+		$U(\unit{mV})$&69.9  & 100.7  & 134.0  & 155.7  & 170.3  & 174.4  & 167.8  & 154.7  & 149.9 \\ \hline
+	\end{tabular}
+  \caption{$(100)$晶面一级极大细扫}
+\end{table}
+
+根据表格，绘制图像如下：
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=8cm]{100晶面一级极大.jpg}
+  \caption{$(100)$晶面一级极大细扫}
+\end{figure}
+
+由图像可知，衍射的极大值点为$65^\circ$左右。代入公式$\lambda'=2d\cos \beta = 3.38 cm$，相对误差为$\frac{|3.38-3.19|}{3.19} \times 100\% = 5.98\%$，误差不算很大，实验较为成功。
+
+\subsubsection{$(110)$晶面的测量}
+
+面间距为$ d = 2 \sqrt{2} = 2.828 \unit{cm} $，测量数据如下：
+
+\begin{table}[H]
+	\centering
+	\begin{tabular}{|l|l|l|l|l|l|l|l|l|l|}
+		\hline
+    $\varphi(^\circ)$ & 30   & 32  & 34   & 36  & 38  & 40   & 42   & 44   & 46   \\ \hline
+		$U(\unit{mV})$ & 5.0   & 1.7   & 7.0   & 5.1   & 5.6   & 4.1   & 6.2   & 7.0   & 7.0   \\ \hline
+		$\varphi(^\circ)$ & 48   & 50  & 52   & 54  & 56  & 58   & 60   & 62   & 64   \\ \hline
+		$U(\unit{mV})$ &20.9  & 30.3  & 31.2  & 28.4  & 24.1  & 20.5  & 19.4  & 15.1  & 8.0     \\ \hline
+		$\varphi(^\circ)$ & 66  & 68 & 70   &      &      &      &      &     &     \\ \hline
+		$U(\unit{mV})$ &1.1   & 1.2   & 0.6 &      &      &      &      &     &       \\ \hline
+	\end{tabular}
+	  \caption{$(110)$的微波布拉格衍射}
+\end{table}
+
+根据表格，绘制图像如下：
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=8cm]{110晶面.jpg}
+  \caption{$(110)$的微波布拉格衍射}
+\end{figure}
+
+从上表可以得到一级极大位于$52^\circ$附近，因此在$52^\circ$附近以$1^\circ$为步长进行精细扫描。扫描数据如下表：
+
+\begin{table}[H]
+	\centering 
+	\begin{tabular}{|l|l|l|l|l|l|l|l|l|l|}
+		\hline
+		$\varphi(°)$ &48    & 49    & 50    & 51    & 52    & 53    & 54    & 55    & 56  \\ \hline
+		$U(\unit{mV})$&19.9  & 21.7  & 28.9  & 29.5  & 30.9  & 32.4  & 25.2  & 21.0  & 19.8   \\ \hline
+	\end{tabular}
+  \caption{$(110)$晶面一级极大细扫}
+\end{table}
+
+根据表格，绘制图像如下：
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=8cm]{110晶面一级极大.jpg}
+  \caption{$(100)$晶面一级极大细扫}
+\end{figure}
+
+由图像可知，衍射的极大值点为$53^\circ$左右。代入公式$\lambda'=2d\cos \beta = 3.40 cm$，相对误差为$\frac{|3.40-3.19|}{3.19} \times 100\% = 6.70\%$，误差相比(100)晶面较大，但仍然在可接受的范围之内。
+
+\subsection{微波的偏振实验}
+
+从相互正对开始，旋转角度每隔$10^\circ$测量一次，直到$90^\circ$，得到的数据如下：
+
+\begin{table}[H]
+  \centering
+  \begin{tabular}{|l|l|l|l|l|l|l|l|l|l|l|}
+    \hline
+    $\theta(^\circ)$ & 0    & 10   & 20   & 30   & 40   & 50   & 60   & 70   & 80  & 90 \\ \hline
+    $U(\unit{mV})$ & 190.4  & 186.4  & 168.5  & 140.5  & 115.3  & 77.6  & 47.7  & 22.0  & 5.5   & 0.0\\ \hline
+    $U_0 \cos^2{\theta}$ & 190.4  & 184.7  & 168.1  & 142.8  & 111.7  & 78.7  & 47.6  & 22.3  & 5.7   & 0.0  \\ \hline
+    \end{tabular}
+    \caption{偏振实验数据}
+\end{table}
+
+根据上表可绘制图像如下：
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=8cm]{微波的偏振.jpg}
+  \caption{微波的偏振实验}
+\end{figure}
+
+从图像可以看出，实验数据与理论值最大相对误差不超过$4.20\%$，与理论值的符合较好，证明验证了马吕斯定律。
+
+\section{思考题}
+
+\subsection{各实验内容误差主要影响是什么？}
+
+(1) 双缝干涉实验：可能双缝的中心不一定处于载物圆台的中心，也可能双缝的宽度与预设值有一定误差。
+
+(2) 微波迈克尔逊干涉实验：两个反射板和玻璃是否完全垂直，而且第二个板移动过快导致忽略极小值。
+
+(3) 微波布拉格衍射实验：转动圆盘时圆盘的摩擦力较大，不易转动，可能会导致角度不精准。
+
+(4) 微波偏振实验：$0^\circ$的位置不一定准确，可能会导致后续角度的误差。
+
+\subsection{金属是一种良好的微波反射器。其它物质的反射特性如何？是否有部分能量透过这些物质还是被吸收了？比较导体与非导体的反射特性。}
+
+(1) 金属材料：不吸收微波，只能反射微波。如铜、铁、铝等。绝缘体：可以透过微波，它几乎不吸收微波的能量。如玻璃、陶瓷等。含有极性分子的物质会吸收微波，比如水。
+
+(2) 导体对微波的反射率高，穿过的部分少；而非导体反射率较低，微波更容易穿透、吸收。
+
+\subsection{为避免每台仪器微波间的干扰，使用吸波材料对每套设备进行了微波屏蔽，请问吸波材料的工作机理是什么？与屏蔽微波波长的关系是什么？}
+
+(1) 工作机理：使微波传播至此时消耗大量能量，显著降低微波向向四周散去的强度。吸波材料吸收电磁波后，以绝缘损耗、磁损耗和阻抗损耗等方式将之转换成热能。
+
+(2) 与屏蔽微波波长的关系：对于本实验中的尖状的海绵材料，电磁波遇之会发生多次反射，而反射量与$\frac{h}{\lambda}$负相关，其中$h$为尖劈材料高度。在$\frac{h}{\lambda}$最大时，反射量几乎达到最小值，此时屏蔽能力最强。
+
+\subsection{假如预先不知道晶体中晶面的方向，是否会增加实验的复杂性？又该如何定位这些晶面？}
+
+(1) 假如预先不知道晶体中晶面的方向，就无法确定入射角与反射角，无法直接进行操作，确实会提高实验的复杂性。
+
+(2) 确定晶面的方法：固定晶体与入射波的夹角，改变反射角，找到电压最大值，通过电压最大时入射角等于反射角来确定晶面的方向。
+
+
+\section{实验总结}
+
+本次实验进行了一系列有关微波的实验，让我对微波的性质有了更加深入的理解。本次实验需要记录并处理大量的数据，对于我的数据处理能力也有了考验和提升。总的来说，这次实验让我更直观的学习到微波相关的仪器和操作，也让我对实验操作有了更多的经验。
+
+\section{实验原始数据}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=16cm]{01.jpg}
+  \caption{P1}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=16cm]{02.jpg}
+  \caption{P2}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=16cm]{03.jpg}
+  \caption{P3}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=16cm]{04.jpg}
+  \caption{P4}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=16cm]{05.jpg}
+  \caption{P5}
+\end{figure}
+
+
+\end{document}
